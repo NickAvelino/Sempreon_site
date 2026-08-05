@@ -57,9 +57,9 @@
   /* HERO */
   .hero{padding:64px 0 56px;position:relative}
   .hero-bg{position:absolute;inset:0;z-index:-2;overflow:hidden;pointer-events:none}
-  .hero-bg::before,.hero-bg::after{content:"";position:absolute;width:56vw;height:56vw;border-radius:50%;filter:blur(90px);opacity:.22}
-  .hero-bg::before{background:var(--green);top:-22%;left:-14%}
-  .hero-bg::after{background:#1fae46;bottom:-30%;right:-18%}
+  .hero-bg::before,.hero-bg::after{content:"";position:absolute;width:clamp(280px,32vw,460px);height:clamp(280px,32vw,460px);border-radius:50%;filter:blur(100px)}
+  .hero-bg::before{background:var(--green);opacity:.14;top:-12%;left:-8%}
+  .hero-bg::after{background:#1fae46;opacity:.1;bottom:-18%;right:-10%}
   .hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
   .eyebrow{font-family:'JetBrains Mono';font-size:12px;letter-spacing:.14em;color:var(--green);text-transform:uppercase;margin-bottom:18px;display:inline-flex;align-items:center;gap:10px}
   .eyebrow::before{content:"";width:22px;height:1px;background:var(--green);opacity:.6}
