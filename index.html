@@ -154,21 +154,12 @@
   .plan:hover{transform:translateY(-3px)}
   .plan.feat{border-color:var(--green);box-shadow:0 0 40px -16px rgba(55,225,95,.5)}
   .plan .badge{position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--green);color:#04130c;font-family:'JetBrains Mono';font-size:10.5px;padding:4px 12px;border-radius:999px;white-space:nowrap}
-  .plan .pname{font-family:'JetBrains Mono';font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+  .plan .pname{font-family:'JetBrains Mono';font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:18px}
   .plan.feat .pname{color:var(--green)}
-  .plan .price{font-family:'Space Grotesk';font-weight:800;font-size:2.2rem;letter-spacing:-.02em;line-height:1}
-  .plan .price small{font-size:.9rem;color:var(--muted);font-weight:500}
-  .plan .price .cur{font-size:1.1rem;vertical-align:top;color:var(--muted);margin-right:2px}
-  .plan .price.consult{font-size:1.35rem}
-  .plan .impl{color:var(--muted);font-size:.8rem;margin:10px 0 18px;padding-bottom:18px;border-bottom:1px solid var(--line)}
   .plan ul{list-style:none;display:flex;flex-direction:column;gap:10px;flex:1}
   .plan li{display:flex;gap:9px;align-items:flex-start;font-size:.86rem;color:#d3d9d5}
   .plan li .ck{flex:0 0 16px;width:16px;height:16px;border-radius:5px;background:var(--green-dim);color:var(--green);display:flex;align-items:center;justify-content:center;font-size:10px;margin-top:2px}
-  .plan .pbtn{margin-top:22px;text-align:center;font-weight:600;font-size:13.5px;padding:12px;border-radius:10px;text-decoration:none;transition:.25s;border:1px solid var(--line);color:var(--txt)}
-  .plan .pbtn:hover{border-color:var(--green);color:var(--green)}
-  .plan.feat .pbtn{background:linear-gradient(135deg,#7dffa0,var(--green) 55%,#1fae46);color:#04130c;border-color:var(--green)}
-  .plans-note{text-align:center;margin-top:26px;color:var(--muted);font-size:.9rem}
-  .plans-note b{color:var(--green);font-weight:600}
+  .plans-cta{text-align:center;margin-top:34px}
   @media(max-width:1080px){.plans{grid-template-columns:repeat(2,1fr)}}
   @media(max-width:560px){.plans{grid-template-columns:1fr;max-width:380px;margin-left:auto;margin-right:auto}}
 
@@ -327,26 +318,21 @@
         <div class="sec-head">
           <div class="sec-eyebrow reveal">Planos</div>
           <h2 class="reveal">Escolha o plano que cabe no seu negócio</h2>
-          <p class="sec-lede reveal">Sem letra miúda. Implementação cobrada uma única vez.</p>
+          <p class="sec-lede reveal">Valores sob consulta — cada negócio tem uma necessidade diferente.</p>
         </div>
         <div class="plans">
           <div class="plan reveal">
             <div class="pname">Essencial</div>
-            <div class="price"><span class="cur">R$</span>197<small>/mês</small></div>
-            <div class="impl">Implementação R$ 297 (única vez)</div>
             <ul>
               <li><span class="ck">✓</span>Atendente virtual 24/7</li>
               <li><span class="ck">✓</span>Dúvidas, horários, preços e endereço</li>
               <li><span class="ck">✓</span>Atualização via WhatsApp</li>
               <li><span class="ck">✓</span>Suporte por WhatsApp</li>
             </ul>
-            <a class="pbtn wpp-plan" href="#" data-plan="Essencial" target="_blank" rel="noopener">Quero este plano</a>
           </div>
           <div class="plan feat reveal">
             <div class="badge">★ Mais escolhido</div>
             <div class="pname">Profissional</div>
-            <div class="price"><span class="cur">R$</span>347<small>/mês</small></div>
-            <div class="impl">Implementação R$ 397 (única vez)</div>
             <ul>
               <li><span class="ck">✓</span>Tudo do Essencial</li>
               <li><span class="ck">✓</span>Agendamento e reserva automáticos</li>
@@ -354,12 +340,9 @@
               <li><span class="ck">✓</span>Relatório mensal</li>
               <li><span class="ck">✓</span>Suporte prioritário</li>
             </ul>
-            <a class="pbtn wpp-plan" href="#" data-plan="Profissional" target="_blank" rel="noopener">Quero este plano</a>
           </div>
           <div class="plan reveal">
             <div class="pname">Premium</div>
-            <div class="price"><span class="cur">R$</span>597<small>/mês</small></div>
-            <div class="impl">Implementação R$ 597 (única vez)</div>
             <ul>
               <li><span class="ck">✓</span>Tudo do Profissional</li>
               <li><span class="ck">✓</span>Múltiplos atendimentos</li>
@@ -367,12 +350,9 @@
               <li><span class="ck">✓</span>Recuperação automática de clientes</li>
               <li><span class="ck">✓</span>Ajustes ilimitados</li>
             </ul>
-            <a class="pbtn wpp-plan" href="#" data-plan="Premium" target="_blank" rel="noopener">Quero este plano</a>
           </div>
           <div class="plan reveal">
             <div class="pname">Personalizado</div>
-            <div class="price consult">Sob consulta</div>
-            <div class="impl">Projeto sob medida</div>
             <ul>
               <li><span class="ck">✓</span>Tudo do Premium</li>
               <li><span class="ck">✓</span>Múltiplos estabelecimentos</li>
@@ -380,10 +360,11 @@
               <li><span class="ck">✓</span>Volume alto de conversas</li>
               <li><span class="ck">✓</span>Suporte dedicado</li>
             </ul>
-            <a class="pbtn wpp-plan" href="#" data-plan="Personalizado" target="_blank" rel="noopener">Falar com a gente</a>
           </div>
         </div>
-        <p class="plans-note reveal">Plano anual: <b>2 meses grátis</b> (pague 10, use 12).</p>
+        <div class="plans-cta reveal">
+          <a class="btn btn-primary wpp-saiba-mais" href="#" target="_blank" rel="noopener">Gostaria de saber mais</a>
+        </div>
       </div>
     </section>
 
@@ -452,11 +433,9 @@
   const TEST_MSG=encodeURIComponent("Oi! Vim do site e gostaria de fazer um teste.");
   const testLink="https://wa.me/"+TEST_WHATSAPP+"?text="+TEST_MSG;
   document.querySelectorAll('#wppTeste, .wpp-teste-link').forEach(el=>{el.href=testLink});
-  document.querySelectorAll('.wpp-plan').forEach(el=>{
-    const plano=el.getAttribute('data-plan');
-    const m=encodeURIComponent("Olá! Vim pelo site da Sempreon e tenho interesse no plano "+plano+". Pode me explicar como funciona?");
-    el.href="https://wa.me/"+WHATSAPP+"?text="+m;
-  });
+
+  const SAIBA_MSG=encodeURIComponent("Olá! Vi os planos no site da Sempreon e gostaria de saber mais.");
+  document.querySelectorAll('.wpp-saiba-mais').forEach(el=>{el.href="https://wa.me/"+WHATSAPP+"?text="+SAIBA_MSG});
   const footWpp=document.getElementById('footWpp');
   if(footWpp){const a=document.createElement('a');a.href=wlink;a.target="_blank";a.rel="noopener";a.textContent="55 13 97817-5551";footWpp.appendChild(a);}
 
