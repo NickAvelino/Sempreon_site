@@ -148,20 +148,6 @@
   .agent p{font-size:.9rem;color:#c0c7cd}
   @media(max-width:900px){.agents{grid-template-columns:1fr}}
 
-  /* CONHECA A SARI */
-  .about-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:56px;align-items:center}
-  .about-photo{position:relative;isolation:isolate}
-  .about-photo::before{content:"";position:absolute;inset:6%;z-index:-1;border-radius:50%;background:radial-gradient(50% 50% at 50% 45%,rgba(55,225,95,.32),transparent 72%);filter:blur(14px)}
-  .about-photo img{max-width:360px;margin:0 auto;filter:drop-shadow(0 30px 60px rgba(0,0,0,.55))}
-  .about-text .sec-eyebrow{margin-bottom:12px}
-  .about-text h2{max-width:none;text-align:left}
-  .about-text p{margin-top:16px;color:#c8cfca;max-width:56ch}
-  .about-list{list-style:none;margin-top:24px;display:flex;flex-direction:column;gap:12px}
-  .about-list li{display:flex;gap:11px;align-items:flex-start;font-size:.96rem}
-  .about-list .ck{flex:0 0 20px;width:20px;height:20px;border-radius:6px;background:var(--green-dim);color:var(--green);display:flex;align-items:center;justify-content:center;font-size:12px;margin-top:1px}
-  .about-text .btn{margin-top:26px}
-  @media(max-width:900px){.about-grid{grid-template-columns:1fr;gap:36px;text-align:center}.about-text h2{text-align:center}.about-list{align-items:flex-start;max-width:360px;margin-left:auto;margin-right:auto}}
-
   /* PLANOS (reaproveitado, mais compacto) */
   .plans{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;align-items:stretch}
   .plan{border:1px solid var(--line);border-radius:16px;padding:26px 22px;background:linear-gradient(180deg,rgba(13,19,15,.6),rgba(6,8,10,.3));display:flex;flex-direction:column;transition:.25s;position:relative}
@@ -220,9 +206,8 @@
     <div class="nav-right">
       <div class="nav-links" id="navLinks">
         <a href="#top" onclick="closeMenu()">Início</a>
-        <a href="#teste" onclick="closeMenu()">Teste ao vivo</a>
         <a href="#solucoes" onclick="closeMenu()">Soluções</a>
-        <a href="#sari" onclick="closeMenu()">Sari</a>
+        <a href="#teste" onclick="closeMenu()">Teste ao vivo</a>
         <a href="#planos" onclick="closeMenu()">Planos</a>
         <a href="#contato" onclick="closeMenu()">Contato</a>
         <a class="nav-cta wpp-teste-link" href="#" target="_blank" rel="noopener" onclick="closeMenu()">Teste ao vivo</a>
@@ -266,28 +251,6 @@
         </div>
       </div>
     </header>
-
-    <section class="block test-band" id="teste">
-      <div class="col">
-        <div class="test-card reveal">
-          <div class="sec-eyebrow">Teste ao vivo · sem compromisso</div>
-          <h2>Simule ser cliente do seu nicho</h2>
-          <p class="test-lede">Se você faz parte de um destes setores, faça um teste agora simulando ser um cliente do seu próprio nicho e veja como pode funcionar seu atendente 24h por dia.</p>
-          <div class="niches-test">
-            <span class="niche-chip">Pousada / Hotel</span>
-            <span class="niche-chip">Contabilidade</span>
-            <span class="niche-chip">Clínica Veterinária</span>
-            <span class="niche-chip">Clínica Médica</span>
-            <span class="niche-chip">Clínica Odontológica</span>
-            <span class="niche-chip">Imobiliária</span>
-          </div>
-          <a class="btn btn-primary" id="wppTeste" href="#" target="_blank" rel="noopener">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="#04130c"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.945C.16 5.335 5.495 0 12.057 0a11.821 11.821 0 018.413 3.488 11.824 11.824 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.477-.607z"/></svg>
-            Testar agora no WhatsApp
-          </a>
-        </div>
-      </div>
-    </section>
 
     <section class="block" id="solucoes">
       <div class="col">
@@ -336,22 +299,24 @@
       </div>
     </section>
 
-    <section class="block" id="sari">
-      <div class="col about-grid">
-        <div class="about-photo reveal">
-          <img src="assets/sari.png" alt="Sari, assistente de inteligência artificial da Sempreon">
-        </div>
-        <div class="about-text">
-          <div class="sec-eyebrow reveal">Sua assistente inteligente</div>
-          <h2 class="reveal">Conheça a Sari</h2>
-          <p class="reveal">Sari é a inteligência artificial da SempreonTech que entende seu negócio e fala a língua do seu cliente. Mais que um bot, uma verdadeira assistente que trabalha por você 24 horas por dia.</p>
-          <ul class="about-list reveal">
-            <li><span class="ck">✓</span>Personalidade adaptada ao seu negócio</li>
-            <li><span class="ck">✓</span>Aprendizado contínuo</li>
-            <li><span class="ck">✓</span>Integração completa com WhatsApp</li>
-            <li><span class="ck">✓</span>Suporte especializado sempre que precisar</li>
-          </ul>
-          <a class="btn btn-primary reveal" id="wpp3" href="#" target="_blank" rel="noopener">Conhecer a Sari</a>
+    <section class="block test-band" id="teste">
+      <div class="col">
+        <div class="test-card reveal">
+          <div class="sec-eyebrow">Teste ao vivo · sem compromisso</div>
+          <h2>Simule ser cliente do seu nicho</h2>
+          <p class="test-lede">Se você faz parte de um destes setores, faça um teste agora simulando ser um cliente do seu próprio nicho e veja como pode funcionar seu atendente 24h por dia.</p>
+          <div class="niches-test">
+            <span class="niche-chip">Pousada / Hotel</span>
+            <span class="niche-chip">Contabilidade</span>
+            <span class="niche-chip">Clínica Veterinária</span>
+            <span class="niche-chip">Clínica Médica</span>
+            <span class="niche-chip">Clínica Odontológica</span>
+            <span class="niche-chip">Imobiliária</span>
+          </div>
+          <a class="btn btn-primary wpp-teste-link" href="#" target="_blank" rel="noopener">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="#04130c"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.945C.16 5.335 5.495 0 12.057 0a11.821 11.821 0 018.413 3.488 11.824 11.824 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.477-.607z"/></svg>
+            Testar agora no WhatsApp
+          </a>
         </div>
       </div>
     </section>
@@ -454,7 +419,7 @@
           <div class="foot-col">
             <h4>Empresa</h4>
             <ul>
-              <li><a href="#sari">Conheça a Sari</a></li>
+              <li><a href="#teste">Teste ao vivo</a></li>
               <li><a href="#planos">Planos</a></li>
               <li><a href="#contato">Contato</a></li>
             </ul>
@@ -480,7 +445,7 @@
   const WHATSAPP="5513978175551";
   const MSG=encodeURIComponent("Olá! Vim pelo site da Sempreon e quero saber sobre a atendente de IA pro meu WhatsApp.");
   const wlink="https://wa.me/"+WHATSAPP+"?text="+MSG;
-  ["wpp2","wpp3"].forEach(id=>{const e=document.getElementById(id);if(e)e.href=wlink});
+  ["wpp2"].forEach(id=>{const e=document.getElementById(id);if(e)e.href=wlink});
 
   const TEST_WHATSAPP="5513988111095";
   const TEST_MSG=encodeURIComponent("Oi! Vim do site e gostaria de fazer um teste.");
