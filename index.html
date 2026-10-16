@@ -180,6 +180,10 @@
   .plan .price{font-family:'Sora';font-size:1.7rem;font-weight:700;color:var(--txt);margin-bottom:6px}
   .plan .price span{font-family:'JetBrains Mono';font-size:12px;font-weight:400;color:var(--muted)}
   .plan .pdesc{font-size:.82rem;color:var(--muted);margin-bottom:16px;line-height:1.5}
+  .plan.soon{opacity:.6}
+  .plan.soon:hover{transform:none}
+  .plan .badge.soon{background:var(--line);color:var(--muted)}
+  .plan.soon .price{font-size:1.15rem}
   .plans-cta{text-align:center;margin-top:34px}
   .plans-note{text-align:center;font-size:.82rem;color:var(--muted);margin-top:14px}
   @media(max-width:1080px){.plans{grid-template-columns:repeat(2,1fr)}}
@@ -422,9 +426,10 @@
             <div class="price">R$ 25<span>/mês</span></div>
             <div class="pdesc">Avisa o cliente automaticamente (lembrete, atualização, etc).</div>
           </div>
-          <div class="plan reveal">
+          <div class="plan soon reveal">
+            <div class="badge soon">Em breve</div>
             <div class="pname">Responde por voz</div>
-            <div class="price">R$ 30<span>/mês</span></div>
+            <div class="price">Em breve</div>
             <div class="pdesc">O agente entende e responde áudio, não só texto.</div>
           </div>
         </div>
