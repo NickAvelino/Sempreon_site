@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sempreontech.com.br/sitemap.xml
