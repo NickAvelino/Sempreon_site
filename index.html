@@ -194,7 +194,7 @@
   @media(max-width:900px){.agents{grid-template-columns:1fr}}
 
   /* PLANOS */
-  .plans{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;align-items:stretch}
+  .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;align-items:stretch}
   .plan{border:1px solid var(--line);border-radius:16px;padding:26px 22px;background:linear-gradient(180deg,rgba(10,18,13,.6),rgba(5,8,6,.3));display:flex;flex-direction:column;transition:.25s;position:relative}
   .plan:hover{transform:translateY(-3px)}
   .plan.feat{border-color:var(--green);box-shadow:0 0 40px -16px rgba(57,240,106,.5)}
@@ -211,6 +211,7 @@
   .plan.soon:hover{transform:none}
   .plan .badge.soon{background:var(--line);color:var(--muted)}
   .plan.soon .price{font-size:1.15rem}
+  .plan.custom .price{font-size:1.15rem}
   .plans-cta{text-align:center;margin-top:34px}
   .plans-note{text-align:center;font-size:.82rem;color:var(--muted);margin-top:14px}
   @media(max-width:1080px){.plans{grid-template-columns:repeat(2,1fr)}}
@@ -452,6 +453,11 @@
             <div class="pname">Notificações · cliente</div>
             <div class="price">R$ 25<span>/mês</span></div>
             <div class="pdesc">Avisa o cliente automaticamente (lembrete, atualização, etc).</div>
+          </div>
+          <div class="plan custom reveal">
+            <div class="pname">Personalizado</div>
+            <div class="price">A consultar</div>
+            <div class="pdesc">Precisa de algo fora dos módulos padrão? A gente monta sob medida pro seu negócio.</div>
           </div>
           <div class="plan soon reveal">
             <div class="badge soon">Em breve</div>
