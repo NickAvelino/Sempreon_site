@@ -82,10 +82,30 @@ h1 .outline{color:transparent;-webkit-text-stroke:1px rgba(238,245,240,.72)}h1 .
 .trust-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}.trust-card{padding:26px;border:1px solid var(--line);border-radius:11px;background:rgba(10,18,13,.72)}.trust-card .index{font:10px var(--mono);color:var(--green)}.trust-card h3{font-size:16px;margin-top:15px}.trust-card p{font-size:12px;color:var(--muted);margin-top:8px}.trust-card strong{color:var(--text);font-weight:600}.trust-steps{display:flex;gap:7px;flex-wrap:wrap;margin-top:17px}.trust-steps span{font:9px var(--mono);color:#c4d0c7;padding:7px 9px;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:5px}
 .faq-list{max-width:850px;border-top:1px solid var(--line)}.faq-item{border-bottom:1px solid var(--line)}.faq-q{width:100%;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:21px 0;background:none;border:0;color:var(--text);text-align:left;font:600 14px var(--inter);cursor:pointer}.chevron{color:var(--green);font-size:19px;transition:transform .2s}.faq-a{display:grid;grid-template-rows:0fr;transition:grid-template-rows .25s}.faq-a>div{overflow:hidden}.faq-a p{color:var(--muted);font-size:13px;padding:0 35px 0 0}.faq-item.open .faq-a{grid-template-rows:1fr}.faq-item.open .faq-a p{padding-bottom:20px}.faq-item.open .chevron{transform:rotate(45deg)}
 .final-cta{padding:82px 0 90px;border-top:1px solid var(--line);background:radial-gradient(ellipse at 50% 100%,rgba(57,240,106,.12),transparent 55%);text-align:center}.final-cta h2{font:800 clamp(35px,5.2vw,60px)/1.04 var(--sora);letter-spacing:-.06em;max-width:720px;margin:0 auto}.final-cta p{color:var(--muted);font-size:14px;max-width:540px;margin:17px auto 0}.final-cta .cta-row{justify-content:center}
+.demo-card{border:1px solid var(--line);background:rgba(9,17,12,.86);border-radius:14px;padding:28px;max-width:640px}
+.demo-steps-label{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+.demo-step-pill{font:9px var(--mono);letter-spacing:.1em;text-transform:uppercase;padding:6px 11px;border-radius:30px;border:1px solid var(--line);color:var(--muted)}
+.demo-step-pill.active{border-color:var(--green);color:var(--green)}
+.demo-hint{color:var(--muted);font-size:12px;margin-bottom:12px}
+.demo-chat{display:flex;flex-direction:column;gap:10px;max-height:320px;overflow-y:auto;padding:2px;margin-bottom:12px}
+.demo-chat:empty{display:none}
+.demo-msg{max-width:85%;padding:10px 13px;border-radius:10px;font-size:13px;line-height:1.5}
+.demo-msg.user{align-self:flex-end;background:var(--green-soft);color:var(--text)}
+.demo-msg.bot{align-self:flex-start;background:rgba(255,255,255,.04);border:1px solid var(--line);color:var(--text)}
+.demo-row{display:flex;gap:10px}
+.demo-row input{flex:1;min-width:0;background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:8px;padding:0 14px;color:var(--text);font:14px var(--inter)}
+.demo-row input:focus{outline:none;border-color:var(--green)}
+.demo-row .btn{flex-shrink:0;min-height:44px;padding:0 18px}
+.demo-counter{font:10px var(--mono);color:var(--green);letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px}
+.demo-fields{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px}
+.demo-fields:empty{display:none}
+.demo-field-chip{font:10px var(--mono);border:1px solid rgba(57,240,106,.3);background:rgba(57,240,106,.08);color:var(--green);padding:6px 10px;border-radius:30px}
+.demo-cta-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.demo-error{color:#ff8a8a;font-size:12px;margin-top:10px}
 footer{border-top:1px solid var(--line);padding:55px 0 22px;background:rgba(3,6,4,.65)}.foot-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.2fr;gap:38px}.foot-brand p{font-size:11px;color:var(--muted);max-width:260px;margin-top:16px}.foot-col h4{font:700 11px var(--sora);margin-bottom:15px}.foot-col ul{list-style:none;display:grid;gap:9px}.foot-col li,.foot-col a{font-size:11px;color:var(--muted)}.foot-col a:hover{color:var(--green)}.foot-bottom{margin-top:42px;padding-top:18px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:15px;color:var(--muted);font-size:10px}.foot-bottom .tagline{font:9px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:#c1cec4}
 .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}.reveal.in-view{opacity:1;transform:none}
 @media(max-width:900px){.col{width:min(100% - 40px,680px)}nav{padding:0 20px}.nav-links{position:fixed;inset:76px 0 auto 0;background:rgba(5,8,6,.98);border-bottom:1px solid var(--line);padding:24px 24px 30px;display:none;align-items:stretch;gap:0;flex-direction:column}.nav-links.open{display:flex}.nav-links>a:not(.nav-cta){padding:13px 0;font-size:15px;border-bottom:1px solid var(--line)}.nav-links .nav-cta{margin-top:18px}.burger{display:block}.nav-right .login{display:none}.hero{padding:60px 0 65px}.hero-grid{grid-template-columns:1fr;gap:15px}.hero-copy{max-width:650px}.hero-art{grid-row:1;min-height:340px;max-width:470px;width:100%;margin:auto}.sari-image{max-height:335px;width:min(76%,300px)}.art-orbit{width:300px}.chat-float.one{right:0;top:6%}.chat-float.two{left:0;bottom:8%}.art-label{right:8%;bottom:0}.hero-copy{text-align:center;margin:auto}.hero-copy .eyebrow{justify-content:center}.hero-copy .lede{margin-left:auto;margin-right:auto}.hero-copy .cta-row,.micro-proof{justify-content:center}.benefit-grid{grid-template-columns:repeat(2,1fr)}.benefit:nth-child(3){border-left:0;padding-left:0;border-top:1px solid var(--line)}.benefit:nth-child(4){border-top:1px solid var(--line)}.agents-grid{grid-template-columns:1fr}.agent-card{min-height:210px}.steps{grid-template-columns:repeat(2,1fr)}.step:nth-child(3){border-left:0;padding-left:0;border-top:1px solid var(--line)}.step:nth-child(4){border-top:1px solid var(--line)}.pricing-grid{grid-template-columns:repeat(2,1fr)}.pricing-top{align-items:start;flex-direction:column}.pricing-note{max-width:none}.foot-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:520px){.col{width:calc(100% - 36px)}nav{height:68px;padding:0 17px}.brand-name{font-size:17px}.brand img{width:27px;height:27px}.nav-links{top:68px}.status-strip .col{font-size:8px;letter-spacing:.035em}.hero{padding:38px 0 58px}h1{font-size:clamp(43px,13vw,61px)}.hero-art{min-height:290px}.art-orbit{width:250px}.sari-image{max-height:285px;width:72%}.chat-float{font-size:9px;padding:9px 10px;max-width:145px}.chat-float.one{right:-3px}.chat-float.two{left:-3px}.section{padding:72px 0}.section-head{margin-bottom:33px}.section h2{font-size:34px}.benefit{padding:20px 12px 21px 0;min-height:170px}.benefit:not(:first-child){padding-left:13px}.benefit:nth-child(3){padding-left:0}.benefit h3{font-size:15px;margin-top:22px}.benefit p{font-size:11px}.agents-section{padding:70px 0}.agent-card{padding:22px}.steps{grid-template-columns:1fr 1fr}.step{padding:20px 10px 18px 0}.step:not(:first-child){padding-left:12px}.step:nth-child(3){padding-left:0}.step h3{font-size:14px;margin-top:19px}.step p{font-size:11px}.pricing-grid{grid-template-columns:1fr}.price-card{min-height:185px}.custom-row{align-items:flex-start;flex-direction:column;padding:20px}.trust-grid{grid-template-columns:1fr}.trust-card{padding:22px}.faq-q{font-size:13px}.final-cta{padding:70px 0}.foot-grid{grid-template-columns:1fr 1fr;gap:30px 18px}.foot-brand{grid-column:1/-1}.foot-bottom{flex-direction:column}.btn{width:100%}.cta-row{width:100%}.cta-row .btn{flex:1 1 100%}}
+@media(max-width:520px){.col{width:calc(100% - 36px)}nav{height:68px;padding:0 17px}.brand-name{font-size:17px}.brand img{width:27px;height:27px}.nav-links{top:68px}.status-strip .col{font-size:8px;letter-spacing:.035em}.hero{padding:38px 0 58px}h1{font-size:clamp(43px,13vw,61px)}.hero-art{min-height:290px}.art-orbit{width:250px}.sari-image{max-height:285px;width:72%}.chat-float{font-size:9px;padding:9px 10px;max-width:145px}.chat-float.one{right:-3px}.chat-float.two{left:-3px}.section{padding:72px 0}.section-head{margin-bottom:33px}.section h2{font-size:34px}.benefit{padding:20px 12px 21px 0;min-height:170px}.benefit:not(:first-child){padding-left:13px}.benefit:nth-child(3){padding-left:0}.benefit h3{font-size:15px;margin-top:22px}.benefit p{font-size:11px}.agents-section{padding:70px 0}.agent-card{padding:22px}.steps{grid-template-columns:1fr 1fr}.step{padding:20px 10px 18px 0}.step:not(:first-child){padding-left:12px}.step:nth-child(3){padding-left:0}.step h3{font-size:14px;margin-top:19px}.step p{font-size:11px}.pricing-grid{grid-template-columns:1fr}.price-card{min-height:185px}.custom-row{align-items:flex-start;flex-direction:column;padding:20px}.trust-grid{grid-template-columns:1fr}.trust-card{padding:22px}.faq-q{font-size:13px}.demo-card{padding:20px}.demo-row{flex-direction:column}.demo-row .btn{width:100%}.final-cta{padding:70px 0}.foot-grid{grid-template-columns:1fr 1fr;gap:30px 18px}.foot-brand{grid-column:1/-1}.foot-bottom{flex-direction:column}.btn{width:100%}.cta-row{width:100%}.cta-row .btn{flex:1 1 100%}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}.reveal{opacity:1;transform:none}}
 </style>
 </head>
@@ -94,7 +114,7 @@ footer{border-top:1px solid var(--line);padding:55px 0 22px;background:rgba(3,6,
 <nav id="nav" aria-label="Navegação principal">
   <a class="brand" href="#top" aria-label="Sempreon, início"><img src="assets/logo-icon.png" alt=""><span class="brand-name">Sempre<span>on</span>Tech</span></a>
   <div class="nav-links" id="navLinks">
-    <a href="#solucoes" onclick="closeMenu()">Soluções</a><a href="#como-funciona" onclick="closeMenu()">Como funciona</a><a href="#planos" onclick="closeMenu()">Planos</a><a href="#confianca" onclick="closeMenu()">Confiança</a><a href="#faq" onclick="closeMenu()">FAQ</a>
+    <a href="#solucoes" onclick="closeMenu()">Soluções</a><a href="#como-funciona" onclick="closeMenu()">Como funciona</a><a href="#demo" onclick="closeMenu()">Teste agora</a><a href="#planos" onclick="closeMenu()">Planos</a><a href="#confianca" onclick="closeMenu()">Confiança</a><a href="#faq" onclick="closeMenu()">FAQ</a>
     <a class="nav-cta" href="https://painel.sempreontech.com.br/planos">Montar meu plano <span>↗</span></a>
   </div>
   <div class="nav-right"><a class="login" href="https://painel.sempreontech.com.br/">Entrar</a><button class="burger" id="burger" aria-label="Abrir menu" aria-expanded="false"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></div>
@@ -156,10 +176,49 @@ footer{border-top:1px solid var(--line);padding:55px 0 22px;background:rgba(3,6,
  </div>
 </section>
 
+<section class="section" id="demo">
+ <div class="col">
+  <div class="section-head reveal"><div class="kicker">04 / Experimente agora</div><h2>Monte um agente de teste.<br>Converse com ele agora mesmo.</h2><p>Sem cadastro, sem compromisso: conte sobre um negócio (pode ser o seu, ou um de mentirinha) e converse com o agente que a IA monta na hora.</p></div>
+  <div class="demo-card reveal">
+   <div class="demo-steps-label">
+     <span class="demo-step-pill active" id="demoPill1">01 Conte o negócio</span>
+     <span class="demo-step-pill" id="demoPill2">02 Converse com o agente</span>
+   </div>
+   <div id="demoStepConfig">
+     <p class="demo-hint">Descreve em poucas frases: o que o negócio faz, horário de atendimento, serviços e preços.</p>
+     <div class="demo-chat" id="demoChat"></div>
+     <div class="demo-fields" id="demoFields"></div>
+     <div class="demo-row">
+       <input id="demoInput" type="text" placeholder="Ex: Tenho uma barbearia, a Barbearia Center, atendemos terça a sábado das 9h às 19h">
+       <button class="btn btn-primary" id="demoSendBtn">Enviar</button>
+     </div>
+     <p class="demo-error" id="demoErro" style="display:none"></p>
+     <div class="demo-cta-row">
+       <button class="btn btn-secondary" id="demoAvancarBtn" style="display:none">Conversar com o agente →</button>
+     </div>
+   </div>
+   <div id="demoStepPreview" style="display:none">
+     <p class="demo-counter" id="previewCounter">10 de 10 perguntas restantes</p>
+     <p class="demo-hint">Pergunta como se fosse um cliente de verdade conversando no WhatsApp.</p>
+     <div class="demo-chat" id="previewChat"></div>
+     <div class="demo-row">
+       <input id="previewInput" type="text" placeholder="Pergunta como se fosse um cliente…">
+       <button class="btn btn-primary" id="previewSendBtn">Enviar</button>
+     </div>
+     <p class="demo-error" id="previewErro" style="display:none"></p>
+     <div class="demo-cta-row">
+       <button class="btn btn-secondary" id="demoVoltarBtn">← Ajustar o negócio</button>
+       <a class="btn btn-primary" href="https://painel.sempreontech.com.br/planos">Gostei, quero o meu ↗</a>
+     </div>
+   </div>
+  </div>
+ </div>
+</section>
+
 <section class="section pricing-section" id="planos">
  <div class="col">
   <div class="pricing-top">
-   <div class="section-head reveal"><div class="kicker">04 / Planos modulares</div><h2>Você escolhe.<br>Paga só pelo que usa.</h2><p>Os módulos são contratados individualmente. Sem pacote fechado: combine os recursos que fazem sentido para sua operação.</p></div>
+   <div class="section-head reveal"><div class="kicker">05 / Planos modulares</div><h2>Você escolhe.<br>Paga só pelo que usa.</h2><p>Os módulos são contratados individualmente. Sem pacote fechado: combine os recursos que fazem sentido para sua operação.</p></div>
    <div class="pricing-note reveal">VALORES MENSAIS<br>PREÇO AVULSO POR MÓDULO</div>
   </div>
   <div class="pricing-grid">
@@ -175,7 +234,7 @@ footer{border-top:1px solid var(--line);padding:55px 0 22px;background:rgba(3,6,
 
 <section class="section" id="confianca">
  <div class="col">
-  <div class="section-head reveal"><div class="kicker">05 / Transparência e segurança</div><h2>Você sabe o que acontece<br>em cada etapa.</h2><p>Contratação clara, acompanhamento humano e informações importantes antes de conectar seu WhatsApp.</p></div>
+  <div class="section-head reveal"><div class="kicker">06 / Transparência e segurança</div><h2>Você sabe o que acontece<br>em cada etapa.</h2><p>Contratação clara, acompanhamento humano e informações importantes antes de conectar seu WhatsApp.</p></div>
   <div class="trust-grid">
    <article class="trust-card reveal"><span class="index">01 / DEPOIS DO PAGAMENTO</span><h3>Configuração acompanhada</h3><p>O processo segue uma sequência: configuração do agente, testes, conexão do WhatsApp e ativação.</p><div class="trust-steps"><span>01 Configuração</span><span>02 Teste</span><span>03 Conexão</span><span>04 Ativação</span></div></article>
    <article class="trust-card reveal"><span class="index">02 / PAGAMENTO</span><h3>Mercado Pago e Pix</h3><p>O pagamento é processado pelo Mercado Pago. <strong>A Sempreon não guarda dados de cartão.</strong></p></article>
@@ -190,7 +249,7 @@ footer{border-top:1px solid var(--line);padding:55px 0 22px;background:rgba(3,6,
 
 <section class="section" id="faq">
  <div class="col">
-  <div class="section-head reveal"><div class="kicker">06 / Dúvidas comuns</div><h2>Antes de começar.</h2></div>
+  <div class="section-head reveal"><div class="kicker">07 / Dúvidas comuns</div><h2>Antes de começar.</h2></div>
   <div class="faq-list">
    <div class="faq-item reveal"><button class="faq-q" aria-expanded="false">Preciso trocar de número de WhatsApp?<span class="chevron">＋</span></button><div class="faq-a"><div><p>Não. Você conecta o número que já usa no seu negócio, sem precisar trocar de número.</p></div></div></div>
    <div class="faq-item reveal"><button class="faq-q" aria-expanded="false">Quanto tempo leva para configurar?<span class="chevron">＋</span></button><div class="faq-a"><div><p>A configuração inicial leva poucos minutos. Depois, você realiza os testes e conecta seu WhatsApp para ativação.</p></div></div></div>
@@ -241,6 +300,92 @@ burger.addEventListener('click',()=>{const open=navLinks.classList.toggle('open'
 function closeMenu(){navLinks.classList.remove('open');burger.setAttribute('aria-expanded','false');document.body.style.overflow=''}
 document.querySelectorAll('.faq-item').forEach(item=>{const q=item.querySelector('.faq-q');q.addEventListener('click',()=>{const open=item.classList.toggle('open');q.setAttribute('aria-expanded',String(open))})});
 if('IntersectionObserver' in window){const io=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in-view');io.unobserve(e.target)}}),{threshold:.12});document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%4*55)+'ms';io.observe(el)})}else{document.querySelectorAll('.reveal').forEach(el=>el.classList.add('in-view'))}
+
+/* Etapa 8.3 — demo interativa (reaproveita as mesmas rotas públicas de
+   /planos no painel, com CORS liberado só pra este domínio — ver
+   lib/cors-publico.ts no repo sempreon-painel). Dois passos: 1) descreve o
+   negócio e a IA preenche a configuração via /api/planos/assistente; 2)
+   conversa com o agente de teste via /api/planos/preview, limitado a 10
+   mensagens por sessão (controlado pelo servidor, nunca só aqui). */
+const PAINEL_ORIGEM="https://painel.sempreontech.com.br";
+function escapeHtml(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML}
+
+let demoHistorico=[],demoDados={},demoEnviando=false;
+function demoRenderChat(){const chat=document.getElementById('demoChat');chat.innerHTML=demoHistorico.map(m=>`<div class="demo-msg ${m.role==='user'?'user':'bot'}">${escapeHtml(m.content)}</div>`).join('');chat.scrollTop=chat.scrollHeight}
+function demoRenderFields(){
+  const wrap=document.getElementById('demoFields');
+  const campos=demoDados.atendimento||{};
+  const labels={nome_agente:'Nome do agente',sobre_empresa:'Sobre a empresa',horario_atendimento:'Horário',servicos_precos:'Serviços e preços',tom_de_voz:'Tom de voz',saudacao_abertura:'Saudação'};
+  wrap.innerHTML=Object.entries(campos).filter(([,v])=>v).map(([k,v])=>`<span class="demo-field-chip">${labels[k]||k}: ${escapeHtml(String(v)).slice(0,40)}</span>`).join('');
+}
+function demoErro(msg){const el=document.getElementById('demoErro');el.textContent=msg;el.style.display='block'}
+async function demoEnviarConfig(){
+  const input=document.getElementById('demoInput');
+  const texto=input.value.trim();
+  if(!texto||demoEnviando)return;
+  demoHistorico.push({role:'user',content:texto});
+  demoRenderChat();input.value='';demoEnviando=true;
+  document.getElementById('demoSendBtn').disabled=true;
+  document.getElementById('demoErro').style.display='none';
+  try{
+    const res=await fetch(PAINEL_ORIGEM+'/api/planos/assistente',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({mensagens:demoHistorico,modulosAtivos:['atendimento'],dadosAtuais:demoDados})});
+    const data=await res.json().catch(()=>null);
+    if(!res.ok||!data){demoErro(data&&data.error||'Não consegui falar com o assistente agora.');return}
+    if(data.texto){demoHistorico.push({role:'assistant',content:data.texto});demoRenderChat()}
+    for(const s of (data.sugestoes||[])){demoDados[s.moduloId]=demoDados[s.moduloId]||{};demoDados[s.moduloId][s.campoNome]=s.valorSugerido}
+    demoRenderFields();
+    const c=demoDados.atendimento||{};
+    if(c.nome_agente&&c.sobre_empresa)document.getElementById('demoAvancarBtn').style.display='inline-flex';
+  }catch(e){demoErro('Não consegui falar com o servidor. Tenta de novo.')}
+  finally{demoEnviando=false;document.getElementById('demoSendBtn').disabled=false}
+}
+
+let previewSessao=(crypto.randomUUID?crypto.randomUUID():String(Math.random())),previewHistorico=[],previewToken=null,previewRestantes=10,previewEnviando=false;
+function previewRenderChat(){
+  const chat=document.getElementById('previewChat');
+  chat.innerHTML=previewHistorico.map(m=>`<div class="demo-msg ${m.role==='user'?'user':'bot'}">${escapeHtml(m.content)}</div>`).join('');
+  chat.scrollTop=chat.scrollHeight;
+  document.getElementById('previewCounter').textContent=previewRestantes+' de 10 perguntas restantes';
+}
+function previewErro(msg){const el=document.getElementById('previewErro');el.textContent=msg;el.style.display='block'}
+function demoAvancarPreview(){
+  document.getElementById('demoStepConfig').style.display='none';
+  document.getElementById('demoStepPreview').style.display='block';
+  document.getElementById('demoPill1').classList.remove('active');
+  document.getElementById('demoPill2').classList.add('active');
+  previewRenderChat();
+}
+function demoVoltarConfig(){
+  document.getElementById('demoStepConfig').style.display='block';
+  document.getElementById('demoStepPreview').style.display='none';
+  document.getElementById('demoPill1').classList.add('active');
+  document.getElementById('demoPill2').classList.remove('active');
+}
+async function demoEnviarPreview(){
+  const input=document.getElementById('previewInput');
+  const texto=input.value.trim();
+  if(!texto||previewEnviando||previewRestantes<=0)return;
+  previewHistorico.push({role:'user',content:texto});
+  previewRenderChat();input.value='';previewEnviando=true;
+  document.getElementById('previewSendBtn').disabled=true;
+  document.getElementById('previewErro').style.display='none';
+  try{
+    const res=await fetch(PAINEL_ORIGEM+'/api/planos/preview',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({sessao:previewSessao,mensagem:texto,modulosAtivos:['atendimento'],dadosPorModulo:demoDados,previewToken})});
+    const data=await res.json().catch(()=>null);
+    if(!res.ok||!data){if(data&&data.limiteAtingido)previewRestantes=0;previewErro(data&&data.error||'Não consegui falar com o agente agora.');previewRenderChat();return}
+    previewHistorico.push({role:'assistant',content:data.resposta});
+    previewToken=data.previewToken;previewRestantes=data.restantes;
+    previewRenderChat();
+  }catch(e){previewErro('Não consegui falar com o servidor. Tenta de novo.')}
+  finally{previewEnviando=false;document.getElementById('previewSendBtn').disabled=false}
+}
+
+document.getElementById('demoSendBtn').addEventListener('click',demoEnviarConfig);
+document.getElementById('demoInput').addEventListener('keydown',e=>{if(e.key==='Enter')demoEnviarConfig()});
+document.getElementById('demoAvancarBtn').addEventListener('click',demoAvancarPreview);
+document.getElementById('demoVoltarBtn').addEventListener('click',demoVoltarConfig);
+document.getElementById('previewSendBtn').addEventListener('click',demoEnviarPreview);
+document.getElementById('previewInput').addEventListener('keydown',e=>{if(e.key==='Enter')demoEnviarPreview()});
 </script>
 </body>
 </html>
