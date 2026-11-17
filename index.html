@@ -37,629 +37,210 @@
 }
 </script>
 <style>
-  :root{
-    --bg:#050806; --bg-2:#0a120d;
-    --line:rgba(160,255,190,.13);
-    --txt:#eef5f0; --muted:#8a988f;
-    --green:#39f06a; --green-dim:rgba(57,240,106,.12); --green-deep:#0e3d20;
-  }
-  *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth;overflow-x:clip}
-  body{background:var(--bg);color:var(--txt);font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:clip;line-height:1.55}
-  body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(55% 45% at 82% -4%,rgba(57,240,106,.1),transparent 60%)}
-  body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:56px 56px;opacity:.22}
-  ::selection{background:var(--green);color:#04130c}
-  img{max-width:100%;display:block}
-  .wrap{position:relative;z-index:2}
-  .col{max-width:1180px;margin:0 auto;padding:0 24px}
-  a{color:inherit}
-  .mono{font-family:'JetBrains Mono'}
-
-  /* recurring "always-on" status dot motif */
-  .dot-live{position:relative;width:7px;height:7px;border-radius:50%;background:var(--green);flex:0 0 auto;box-shadow:0 0 0 0 rgba(57,240,106,.6)}
-  .dot-live::after{content:"";position:absolute;inset:0;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
-  @keyframes pulse{0%{transform:scale(1);opacity:.7}70%{transform:scale(2.6);opacity:0}100%{opacity:0}}
-
-  /* NAV */
-  nav{position:sticky;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:16px 24px;background:rgba(5,8,6,.6);backdrop-filter:blur(14px);border-bottom:1px solid transparent;transition:.3s}
-  nav.scrolled{background:rgba(5,8,6,.88);border-bottom:1px solid var(--line)}
-  .brand{display:flex;align-items:center;gap:9px;text-decoration:none;cursor:pointer;color:var(--txt);flex:0 0 auto}
-  .brand img{width:28px;height:28px;object-fit:contain}
-  .brand .wm{font-family:'Sora';font-weight:700;font-size:18px;letter-spacing:-.02em}
-  .brand .wm b{color:var(--green);font-weight:800}
-  .nav-links{display:flex;gap:28px;align-items:center}
-  .nav-links a{color:var(--muted);text-decoration:none;font-size:14px;transition:color .2s}
-  .nav-links a:hover{color:var(--txt)}
-  .nav-links a.nav-cta{font-family:'Sora';font-weight:700;font-size:13px;background:var(--green);color:#04130c;border-radius:8px;padding:10px 18px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:.25s;white-space:nowrap}
-  .nav-links a.nav-cta:hover{transform:translateY(-1px);box-shadow:0 10px 26px -8px rgba(57,240,106,.55)}
-  .nav-right{display:flex;align-items:center;gap:20px}
-  .burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px;z-index:110}
-  .burger span{width:22px;height:2px;background:var(--txt);border-radius:2px;transition:.3s}
-  .burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
-  .burger.open span:nth-child(2){opacity:0}
-  .burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
-
-  @media(max-width:900px){
-    .nav-links{position:fixed;inset:0 0 0 auto;top:0;height:100vh;width:78vw;max-width:340px;background:rgba(5,8,6,.98);backdrop-filter:blur(20px);flex-direction:column;justify-content:center;align-items:flex-start;gap:26px;padding:32px;transform:translateX(100%);transition:transform .35s cubic-bezier(.2,.8,.2,1);border-left:1px solid var(--line)}
-    .nav-links.open{transform:translateX(0)}
-    .nav-links a{font-size:19px;color:var(--txt)}
-    .nav-links a.nav-cta{margin-top:10px;font-size:15px;padding:13px 22px;color:#04130c}
-    .burger{display:flex}
-  }
-
-  /* status strip under nav */
-  .status-strip{border-bottom:1px solid var(--line);background:rgba(14,61,32,.14)}
-  .status-strip .col{display:flex;align-items:center;gap:9px;padding:8px 24px;font-size:11.5px;color:var(--muted);letter-spacing:.04em}
-  .status-strip b{color:var(--green);font-weight:600}
-
-  /* HERO */
-  .hero{padding:64px 0 56px;position:relative}
-  .hero-bg{position:absolute;inset:0;z-index:-2;overflow:hidden;pointer-events:none}
-  .hero-bg img{position:absolute;top:-18%;right:-16%;width:min(70vw,900px);max-width:none;opacity:.4;mix-blend-mode:screen;-webkit-mask-image:radial-gradient(closest-side,#000 45%,transparent 100%);mask-image:radial-gradient(closest-side,#000 45%,transparent 100%)}
-  .hero-bg::after{content:"";position:absolute;width:clamp(280px,32vw,460px);height:clamp(280px,32vw,460px);border-radius:50%;filter:blur(100px);background:var(--green);opacity:.12;bottom:-20%;left:-8%}
-  .hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
-  .eyebrow{font-family:'JetBrains Mono';font-size:12px;letter-spacing:.14em;color:var(--green);text-transform:uppercase;margin-bottom:18px;display:inline-flex;align-items:center;gap:10px}
-  h1{font-family:'Sora';font-weight:800;font-size:clamp(2.1rem,5vw,3.4rem);line-height:1.05;letter-spacing:-.03em;max-width:14ch}
-  h1 em{font-style:normal;color:var(--green)}
-  .lede{margin-top:20px;max-width:44ch;font-size:clamp(1rem,1.6vw,1.1rem);color:#c3ccc6}
-  .cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
-  .btn{font-family:'Sora';font-weight:700;font-size:14.5px;padding:14px 24px;border-radius:10px;text-decoration:none;display:inline-flex;align-items:center;gap:9px;transition:.25s;border:1px solid transparent;white-space:nowrap}
-  .btn-primary{background:var(--green);color:#04130c}
-  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 30px -10px rgba(57,240,106,.55)}
-  .btn-ghost{border-color:var(--line);color:var(--txt)}
-  .btn-ghost:hover{border-color:var(--green);color:var(--green)}
-
-  .feat-row{display:flex;flex-wrap:wrap;gap:26px;margin-top:38px}
-  .feat-item{display:flex;align-items:center;gap:9px;font-size:13px;color:var(--muted)}
-  .feat-item svg{color:var(--green);flex:0 0 auto}
-
-  .hero-visual{position:relative}
-  .hero-photo{position:relative;isolation:isolate}
-  .hero-photo::before{content:"";position:absolute;inset:8%;z-index:-1;background:radial-gradient(48% 46% at 56% 40%,rgba(57,240,106,.32),transparent 72%);filter:blur(10px)}
-  .hero-photo img.sari{width:100%;max-width:420px;margin:0 auto;filter:drop-shadow(0 30px 60px rgba(0,0,0,.55))}
-  .hero-frame{position:absolute;inset:-6% -10%;border:1px dashed var(--line);border-radius:24px;pointer-events:none}
-  .hero-frame::before,.hero-frame::after{content:"";position:absolute;width:14px;height:14px;border-color:var(--green)}
-  .corner{position:absolute;width:16px;height:16px;border:2px solid var(--green);opacity:.7}
-  .corner.tl{top:-6%;left:-10%;border-right:none;border-bottom:none}
-  .corner.br{bottom:-6%;right:-10%;border-left:none;border-top:none}
-  .hero-badge{position:absolute;left:0;bottom:6%;background:rgba(10,18,13,.9);backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:12px;padding:10px 16px;display:flex;align-items:center;gap:10px;box-shadow:0 20px 50px -20px rgba(0,0,0,.6)}
-  .hero-badge .dot-ic{width:34px;height:34px;border-radius:9px;background:var(--green-dim);color:var(--green);display:flex;align-items:center;justify-content:center;flex:0 0 auto}
-  .hero-badge .t1{font-weight:700;font-size:13.5px;font-family:'Sora';display:flex;align-items:center;gap:6px}
-  .hero-badge .t2{font-size:11.5px;color:var(--muted)}
-  .hero-bub{position:absolute;background:#0d1a12;border:1px solid var(--line);border-radius:10px;padding:9px 13px;font-size:12.5px;max-width:180px;box-shadow:0 16px 40px -16px rgba(0,0,0,.6)}
-  .hero-bub.out{background:#0e3d20;border-color:rgba(57,240,106,.3)}
-  .hero-bub .t{display:block;color:var(--muted);font-size:10px;margin-top:3px}
-  .hero-bub.out .t{color:var(--green)}
-  .bub1{top:2%;right:-4%}
-  .bub2{top:20%;left:-8%}
-  .bub3{top:38%;right:0}
-
-  @media(max-width:900px){
-    .hero{padding:36px 0 44px}
-    .hero-grid{grid-template-columns:1fr;gap:36px}
-    .hero-visual{order:-1;max-width:320px;margin:0 auto}
-    .hero-photo img.sari{max-width:280px}
-    .hero-frame,.corner{display:none}
-    h1{max-width:none}
-    .hero-bub{display:none}
-    .hero-badge{left:50%;transform:translateX(-50%);bottom:-14px;white-space:nowrap}
-    .cta-row{justify-content:center}
-    .feat-row{justify-content:center}
-    .lede{margin-left:auto;margin-right:auto;text-align:center}
-  }
-  @media(max-width:420px){
-    .btn{flex:1 1 auto;justify-content:center}
-  }
-
-  /* SECTION shell */
-  section.block{padding:88px 0;position:relative}
-  .sec-head{max-width:640px;margin:0 auto 48px;text-align:center}
-  .sec-eyebrow{font-family:'JetBrains Mono';font-size:11.5px;letter-spacing:.14em;color:var(--green);text-transform:uppercase;margin-bottom:14px}
-  h2{font-family:'Sora';font-weight:800;font-size:clamp(1.7rem,3.6vw,2.5rem);line-height:1.12;letter-spacing:-.02em}
-  .sec-lede{margin-top:16px;color:var(--muted);font-size:1rem}
-  @media(max-width:900px){section.block{padding:60px 0}}
-
-  /* TESTE AO VIVO */
-  .test-band{padding-top:56px}
-  .test-card{max-width:900px;margin:0 auto;border:1px solid rgba(57,240,106,.3);border-radius:20px;padding:44px 36px;background:linear-gradient(180deg,rgba(57,240,106,.07),rgba(5,8,6,.2));box-shadow:0 0 60px -24px rgba(57,240,106,.35);display:grid;grid-template-columns:1fr 260px;gap:12px;align-items:center;position:relative;overflow:hidden}
-  .test-copy{text-align:left}
-  .test-card h2{margin-top:6px}
-  .test-lede{margin:16px 0 0;max-width:52ch;color:#c3ccc6;font-size:1rem}
-  .niches-test{display:flex;flex-wrap:wrap;gap:9px;margin:26px 0 30px}
-  .niche-chip{border:1px solid var(--line);border-radius:999px;padding:8px 16px;font-size:13px;color:#bcd2c4;background:rgba(255,255,255,.02)}
-  .test-phone-wrap{flex:0 0 auto;-webkit-mask-image:radial-gradient(60% 60% at 50% 50%,#000 55%,transparent 100%);mask-image:radial-gradient(60% 60% at 50% 50%,#000 55%,transparent 100%)}
-  .test-phone{width:260px;opacity:.96}
-  @media(max-width:820px){.test-card{grid-template-columns:1fr;text-align:center;padding:36px 26px}.test-copy{text-align:center}.niches-test,.test-lede{margin-left:auto;margin-right:auto;justify-content:center}.test-phone-wrap{margin:0 auto -20px;order:-1}.test-phone{width:220px}}
-
-  /* SOLUCOES grid */
-  .sol-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-  .sol-card{border:1px solid var(--line);border-radius:16px;padding:26px 22px;background:linear-gradient(180deg,rgba(10,18,13,.6),rgba(5,8,6,.3));transition:.25s;position:relative}
-  .sol-card:hover{border-color:rgba(57,240,106,.35);transform:translateY(-3px)}
-  .sol-card .idx{position:absolute;top:18px;right:20px;font-family:'JetBrains Mono';font-size:11px;color:var(--muted);opacity:.6}
-  .sol-card .ic{width:42px;height:42px;border-radius:11px;background:var(--green-dim);color:var(--green);display:flex;align-items:center;justify-content:center;margin-bottom:18px}
-  .sol-card h3{font-family:'Sora';font-weight:700;font-size:1.05rem;margin-bottom:8px;letter-spacing:-.01em}
-  .sol-card p{color:var(--muted);font-size:.9rem}
-  @media(max-width:900px){.sol-grid{grid-template-columns:repeat(2,1fr)}}
-  @media(max-width:560px){.sol-grid{grid-template-columns:1fr}}
-
-  /* AGENTES reais */
-  .agents-band{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:rgba(10,18,13,.5);position:relative;overflow:hidden}
-  .agents-band .bg-net{position:absolute;inset:0;opacity:.16;pointer-events:none;object-fit:cover;width:100%;height:100%}
-  .agents{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;position:relative}
-  .agent{border:1px solid var(--line);border-radius:16px;padding:26px;background:rgba(5,8,6,.55);backdrop-filter:blur(6px)}
-  .agent .tag{font-family:'JetBrains Mono';font-size:10.5px;color:var(--green);background:var(--green-dim);padding:4px 10px;border-radius:6px;display:inline-flex;align-items:center;gap:6px}
-  .agent h3{font-family:'Sora';font-weight:800;font-size:1.4rem;margin:16px 0 3px;letter-spacing:-.02em}
-  .agent .role{color:var(--muted);font-size:.85rem;margin-bottom:12px;font-family:'JetBrains Mono'}
-  .agent p{font-size:.9rem;color:#bfc9c3}
-  @media(max-width:900px){.agents{grid-template-columns:1fr}}
-
-  /* PLANOS */
-  .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;align-items:stretch}
-  .plan{border:1px solid var(--line);border-radius:16px;padding:26px 22px;background:linear-gradient(180deg,rgba(10,18,13,.6),rgba(5,8,6,.3));display:flex;flex-direction:column;transition:.25s;position:relative}
-  .plan:hover{transform:translateY(-3px)}
-  .plan.feat{border-color:var(--green);box-shadow:0 0 40px -16px rgba(57,240,106,.5)}
-  .plan .badge{position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--green);color:#04130c;font-family:'JetBrains Mono';font-size:10.5px;padding:4px 12px;border-radius:999px;white-space:nowrap;font-weight:600}
-  .plan .pname{font-family:'JetBrains Mono';font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:18px}
-  .plan.feat .pname{color:var(--green)}
-  .plan ul{list-style:none;display:flex;flex-direction:column;gap:10px;flex:1}
-  .plan li{display:flex;gap:9px;align-items:flex-start;font-size:.86rem;color:#cdd6d0}
-  .plan li .ck{flex:0 0 16px;width:16px;height:16px;border-radius:5px;background:var(--green-dim);color:var(--green);display:flex;align-items:center;justify-content:center;font-size:10px;margin-top:2px}
-  .plan .price{font-family:'Sora';font-size:1.7rem;font-weight:700;color:var(--txt);margin-bottom:6px}
-  .plan .price span{font-family:'JetBrains Mono';font-size:12px;font-weight:400;color:var(--muted)}
-  .plan .pdesc{font-size:.82rem;color:var(--muted);margin-bottom:16px;line-height:1.5}
-  .plan.soon{opacity:.6}
-  .plan.soon:hover{transform:none}
-  .plan .badge.soon{background:var(--line);color:var(--muted)}
-  .plan.soon .price{font-size:1.15rem}
-  .plan.custom .price{font-size:1.15rem}
-  .plans-cta{text-align:center;margin-top:34px}
-  .plans-note{text-align:center;font-size:.82rem;color:var(--muted);margin-top:14px}
-  @media(max-width:1080px){.plans{grid-template-columns:repeat(2,1fr)}}
-  @media(max-width:560px){.plans{grid-template-columns:1fr;max-width:380px;margin-left:auto;margin-right:auto}}
-
-  /* CONFIANÇA */
-  .trust-flow{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px;max-width:920px;margin:0 auto 48px}
-  .trust-step{display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:12px;padding:12px 16px;background:linear-gradient(180deg,rgba(10,18,13,.6),rgba(5,8,6,.3));font-size:.86rem;color:#cdd6d0;white-space:nowrap}
-  .trust-step .n{font-family:'JetBrains Mono';font-size:11px;color:var(--green);background:var(--green-dim);width:20px;height:20px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex:0 0 auto}
-  .trust-arrow{color:var(--muted);flex:0 0 auto}
-  @media(max-width:820px){.trust-flow{flex-direction:column;align-items:stretch}.trust-step{white-space:normal;justify-content:flex-start}.trust-arrow{transform:rotate(90deg);align-self:center}}
-
-  .trust-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-  .trust-card{border:1px solid var(--line);border-radius:16px;padding:24px 22px;background:linear-gradient(180deg,rgba(10,18,13,.6),rgba(5,8,6,.3))}
-  .trust-card .ic{width:38px;height:38px;border-radius:10px;background:var(--green-dim);color:var(--green);display:flex;align-items:center;justify-content:center;margin-bottom:14px}
-  .trust-card h3{font-family:'Sora';font-weight:700;font-size:.98rem;margin-bottom:8px;letter-spacing:-.01em}
-  .trust-card p{color:var(--muted);font-size:.86rem}
-  .trust-card p a{color:var(--green);text-decoration:none}
-  .trust-card p a:hover{text-decoration:underline}
-  @media(max-width:1080px){.trust-grid{grid-template-columns:repeat(2,1fr)}}
-  @media(max-width:560px){.trust-grid{grid-template-columns:1fr}}
-
-  .trust-cta{text-align:center;margin-top:40px;padding-top:32px;border-top:1px solid var(--line)}
-  .trust-cta p{color:var(--muted);font-size:.94rem;margin-bottom:14px}
-
-  /* FAQ */
-  .faq-list{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
-  .faq-item{border:1px solid var(--line);border-radius:14px;background:linear-gradient(180deg,rgba(10,18,13,.6),rgba(5,8,6,.3));overflow:hidden}
-  .faq-q{width:100%;display:flex;align-items:center;justify-content:space-between;gap:16px;text-align:left;background:none;border:none;color:var(--txt);font-family:'Sora';font-weight:600;font-size:.98rem;padding:20px 22px;cursor:pointer}
-  .faq-chevron{flex:0 0 auto;color:var(--green);transition:transform .25s}
-  .faq-item.open .faq-chevron{transform:rotate(180deg)}
-  .faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease}
-  .faq-a p{padding:0 22px 20px;color:var(--muted);font-size:.9rem;max-width:60ch}
-  .faq-item.open .faq-a{max-height:200px}
-
-  /* FINAL CTA */
-  .final{text-align:center;padding:100px 0;position:relative;isolation:isolate;border-top:1px solid var(--line)}
-  .final::before{content:"";position:absolute;inset:-60px;z-index:-1;background:url('assets/network-nodes.png') center/cover no-repeat;opacity:.5;-webkit-mask-image:radial-gradient(65% 75% at 50% 50%,#000 35%,transparent 85%);mask-image:radial-gradient(65% 75% at 50% 50%,#000 35%,transparent 85%)}
-  .final h2{margin:0 auto;max-width:20ch}
-  .final .sec-lede{margin:16px auto 0;max-width:46ch}
-  .final .cta-row{justify-content:center;margin-top:30px}
-  @media(max-width:900px){.final{padding:64px 0}}
-
-  /* FOOTER */
-  footer{border-top:1px solid var(--line);padding:56px 0 26px;color:var(--muted);font-size:13.5px}
-  .foot-grid{display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:32px;padding-bottom:36px}
-  .foot-brand .brand{margin-bottom:12px}
-  .foot-brand p{max-width:32ch;font-size:13px}
-  .foot-col h4{font-family:'Sora';color:var(--txt);font-size:13.5px;margin-bottom:14px}
-  .foot-col ul{list-style:none;display:flex;flex-direction:column;gap:9px}
-  .foot-col a{color:var(--muted);text-decoration:none;font-size:13.5px}
-  .foot-col a:hover{color:var(--green)}
-  .foot-bottom{border-top:1px solid var(--line);padding-top:22px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;font-size:12.5px}
-  .foot-bottom span.mono{display:inline-flex;align-items:center;gap:7px}
-  @media(max-width:820px){.foot-grid{grid-template-columns:1fr 1fr;gap:28px 20px}}
-  @media(max-width:520px){.foot-grid{grid-template-columns:1fr}.foot-bottom{flex-direction:column;text-align:center}}
-
-  .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
-  .reveal.in-view{opacity:1;transform:none}
+:root{--bg:#050806;--panel:#0a120d;--panel2:#0d1911;--line:rgba(160,255,190,.14);--text:#eef5f0;--muted:#8a988f;--green:#39f06a;--green-soft:rgba(57,240,106,.12);--deep:#0e3d20;--sora:"Sora",sans-serif;--inter:"Inter",sans-serif;--mono:"JetBrains Mono",monospace}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:88px;overflow-x:clip}
+body{background:var(--bg);color:var(--text);font:16px/1.6 var(--inter);overflow-x:clip;-webkit-font-smoothing:antialiased}
+body:before{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;background:radial-gradient(ellipse at 82% 5%,rgba(57,240,106,.11),transparent 34%),radial-gradient(ellipse at 8% 58%,rgba(57,240,106,.045),transparent 28%)}
+body:after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.16;background-image:linear-gradient(rgba(160,255,190,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(160,255,190,.08) 1px,transparent 1px);background-size:64px 64px;mask-image:linear-gradient(to bottom,black,transparent 78%)}
+::selection{background:var(--green);color:#04130c}
+a{color:inherit;text-decoration:none}button{font:inherit}img{display:block;max-width:100%}
+.wrap{position:relative;z-index:1}.col{width:min(1160px,calc(100% - 48px));margin:auto}
+.mono,.eyebrow,.kicker,.price-label,.step-no,.status{font-family:var(--mono)}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--green);display:inline-block;box-shadow:0 0 14px rgba(57,240,106,.8);flex:none}
+nav{height:76px;position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:0 max(24px,calc((100vw - 1160px)/2));background:rgba(5,8,6,.82);backdrop-filter:blur(18px);border-bottom:1px solid transparent;transition:.25s}
+nav.scrolled{border-color:var(--line);background:rgba(5,8,6,.94)}
+.brand{display:flex;align-items:center;gap:10px;white-space:nowrap}.brand img{width:31px;height:31px;object-fit:contain}.brand-name{font:800 19px var(--sora);letter-spacing:-.8px}.brand-name span{color:var(--green)}
+.nav-links{display:flex;align-items:center;gap:28px}.nav-links>a:not(.nav-cta){font-size:13px;color:#a8b4ab;transition:color .2s}.nav-links>a:hover{color:var(--green)}
+.nav-cta,.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font:700 13px var(--sora);border-radius:8px;transition:transform .2s,box-shadow .2s,border-color .2s,background .2s}
+.nav-cta{padding:11px 17px;background:var(--green);color:#04130c}.nav-cta:hover,.btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(57,240,106,.22)}
+.nav-right{display:flex;align-items:center;gap:16px}.login{font-size:13px;color:#b5c1b8}.burger{display:none;background:none;border:0;color:white;padding:8px}
+.status-strip{border-bottom:1px solid var(--line);background:rgba(14,61,32,.13)}.status-strip .col{min-height:34px;display:flex;align-items:center;gap:10px;color:var(--muted);font:10px var(--mono);letter-spacing:.07em;text-transform:uppercase}.status-strip b{color:var(--green);font-weight:500}
+.hero{padding:84px 0 82px;position:relative;overflow:hidden}.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;color:var(--green);font-size:10px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:24px}
+h1,h2,h3{font-family:var(--sora)}h1{font-size:clamp(46px,6.5vw,82px);line-height:.99;letter-spacing:-.075em;font-weight:800;max-width:750px}
+h1 .outline{color:transparent;-webkit-text-stroke:1px rgba(238,245,240,.72)}h1 .green{color:var(--green)}
+.hero-copy{max-width:540px}.lede{font-size:clamp(16px,1.7vw,18px);color:#b7c3ba;max-width:490px;margin-top:25px}.lede strong{color:var(--text);font-weight:600}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:31px}.btn{padding:15px 21px;min-height:50px}.btn-primary{background:var(--green);color:#04130c}.btn-secondary{border:1px solid rgba(238,245,240,.2);color:var(--text);background:rgba(255,255,255,.02)}.btn-secondary:hover{border-color:var(--green);color:var(--green)}
+.micro-proof{display:flex;align-items:center;gap:11px;margin-top:28px;color:var(--muted);font-size:11px}.micro-proof .line{height:1px;width:35px;background:var(--green);opacity:.7}
+.hero-art{position:relative;min-height:480px;display:grid;place-items:center}.art-orbit{position:absolute;width:min(90%,440px);aspect-ratio:1;border:1px solid rgba(57,240,106,.25);border-radius:50%;box-shadow:0 0 90px rgba(57,240,106,.08),inset 0 0 60px rgba(57,240,106,.04)}.art-orbit:before,.art-orbit:after{content:"";position:absolute;border:1px dashed rgba(57,240,106,.2);border-radius:50%;inset:9%}.art-orbit:after{inset:20%;border-style:solid;opacity:.45}
+.sari-image{position:relative;z-index:2;width:min(88%,390px);max-height:465px;object-fit:contain;filter:drop-shadow(0 25px 55px rgba(0,0,0,.65))}
+.chat-float{position:absolute;z-index:3;padding:12px 15px;border:1px solid rgba(57,240,106,.25);background:rgba(9,19,12,.94);border-radius:10px;box-shadow:0 16px 40px rgba(0,0,0,.4);font-size:11px;max-width:190px;animation:float 5s ease-in-out infinite}
+.chat-float small{display:block;color:var(--muted);font:9px var(--mono);margin-bottom:5px}.chat-float strong{font-weight:500}.chat-float.one{top:10%;right:-2%}.chat-float.two{bottom:13%;left:-2%;animation-delay:-2.5s}.chat-float .ok{color:var(--green)}
+@keyframes float{50%{transform:translateY(-9px)}}
+.art-label{position:absolute;right:3%;bottom:1%;font:9px var(--mono);letter-spacing:.12em;color:var(--muted);text-transform:uppercase}
+.section{padding:104px 0;position:relative}.section-head{max-width:700px;margin-bottom:48px}.kicker{color:var(--green);font-size:10px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:15px}.section h2{font-size:clamp(32px,4.5vw,54px);line-height:1.06;letter-spacing:-.055em}.section-head p{color:var(--muted);max-width:560px;margin-top:17px;font-size:15px}
+.benefit-grid{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.benefit{padding:27px 22px 29px 0;min-height:190px;position:relative}.benefit:not(:first-child){padding-left:22px;border-left:1px solid var(--line)}.benefit .num{font:10px var(--mono);color:var(--green);letter-spacing:.12em}.benefit h3{font-size:17px;margin-top:27px;letter-spacing:-.03em}.benefit p{font-size:12px;color:var(--muted);margin-top:8px;max-width:220px}
+.agents-section{padding:92px 0;background:linear-gradient(180deg,rgba(14,61,32,.12),transparent);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.agents-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.agent-card{border:1px solid var(--line);background:linear-gradient(145deg,rgba(15,28,19,.92),rgba(7,12,9,.9));padding:26px;border-radius:12px;min-height:260px;position:relative;overflow:hidden;transition:transform .25s,border-color .25s}.agent-card:hover{transform:translateY(-5px);border-color:rgba(57,240,106,.45)}.agent-card:after{content:"";position:absolute;width:170px;height:170px;border-radius:50%;background:rgba(57,240,106,.07);filter:blur(35px);right:-90px;bottom:-90px}
+.agent-top{display:flex;justify-content:space-between;align-items:center}.agent-name{font:700 25px var(--sora);letter-spacing:-1px}.status{font-size:9px;color:var(--green);border:1px solid rgba(57,240,106,.25);padding:5px 8px;border-radius:30px}.agent-role{color:#bdc9c0;font-size:12px;margin-top:5px}.agent-card h3{font-size:15px;margin-top:31px}.agent-card p{color:var(--muted);font-size:12px;margin-top:9px;max-width:300px}.agent-tag{font:9px var(--mono);color:var(--green);margin-top:20px;display:block;letter-spacing:.08em;text-transform:uppercase}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line)}.step{padding:25px 22px 10px 0;position:relative}.step:not(:first-child){padding-left:22px;border-left:1px solid var(--line)}.step-no{color:var(--green);font-size:11px}.step h3{font-size:17px;margin-top:26px}.step p{font-size:12px;color:var(--muted);margin-top:9px;max-width:220px}.step:before{content:"";position:absolute;top:-4px;left:0;width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 15px rgba(57,240,106,.6)}
+.pricing-section{background:linear-gradient(180deg,transparent,rgba(14,61,32,.12),transparent)}.pricing-top{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:43px}.pricing-top .section-head{margin:0}.pricing-note{font:10px var(--mono);color:var(--muted);max-width:210px;line-height:1.7}
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.price-card{border:1px solid var(--line);background:rgba(9,17,12,.86);padding:25px;border-radius:11px;min-height:210px;display:flex;flex-direction:column;transition:border-color .2s,transform .2s}.price-card:hover{border-color:rgba(57,240,106,.4);transform:translateY(-3px)}.price-card.featured{background:linear-gradient(145deg,rgba(57,240,106,.12),rgba(9,17,12,.94) 70%);border-color:rgba(57,240,106,.4)}.price-label{font-size:9px;color:var(--green);letter-spacing:.12em;text-transform:uppercase}.price-card h3{font-size:18px;margin-top:17px}.price{font:700 31px var(--sora);letter-spacing:-1.5px;margin-top:12px}.price small{font:11px var(--inter);color:var(--muted);letter-spacing:0}.price-card p{font-size:11px;color:var(--muted);margin-top:10px}.price-card .card-bottom{margin-top:auto;padding-top:20px;font:9px var(--mono);color:#9eaaa1}.price-card .soon{color:var(--green)}
+.custom-row{margin-top:13px;display:flex;align-items:center;justify-content:space-between;gap:20px;border:1px solid rgba(57,240,106,.25);border-radius:11px;background:rgba(57,240,106,.055);padding:22px 25px}.custom-row h3{font-size:17px}.custom-row p{font-size:12px;color:var(--muted);margin-top:4px}.custom-row .btn{min-height:42px;padding:11px 16px;font-size:11px;white-space:nowrap}
+.trust-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}.trust-card{padding:26px;border:1px solid var(--line);border-radius:11px;background:rgba(10,18,13,.72)}.trust-card .index{font:10px var(--mono);color:var(--green)}.trust-card h3{font-size:16px;margin-top:15px}.trust-card p{font-size:12px;color:var(--muted);margin-top:8px}.trust-card strong{color:var(--text);font-weight:600}.trust-steps{display:flex;gap:7px;flex-wrap:wrap;margin-top:17px}.trust-steps span{font:9px var(--mono);color:#c4d0c7;padding:7px 9px;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:5px}
+.faq-list{max-width:850px;border-top:1px solid var(--line)}.faq-item{border-bottom:1px solid var(--line)}.faq-q{width:100%;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:21px 0;background:none;border:0;color:var(--text);text-align:left;font:600 14px var(--inter);cursor:pointer}.chevron{color:var(--green);font-size:19px;transition:transform .2s}.faq-a{display:grid;grid-template-rows:0fr;transition:grid-template-rows .25s}.faq-a>div{overflow:hidden}.faq-a p{color:var(--muted);font-size:13px;padding:0 35px 0 0}.faq-item.open .faq-a{grid-template-rows:1fr}.faq-item.open .faq-a p{padding-bottom:20px}.faq-item.open .chevron{transform:rotate(45deg)}
+.final-cta{padding:82px 0 90px;border-top:1px solid var(--line);background:radial-gradient(ellipse at 50% 100%,rgba(57,240,106,.12),transparent 55%);text-align:center}.final-cta h2{font:800 clamp(35px,5.2vw,60px)/1.04 var(--sora);letter-spacing:-.06em;max-width:720px;margin:0 auto}.final-cta p{color:var(--muted);font-size:14px;max-width:540px;margin:17px auto 0}.final-cta .cta-row{justify-content:center}
+footer{border-top:1px solid var(--line);padding:55px 0 22px;background:rgba(3,6,4,.65)}.foot-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.2fr;gap:38px}.foot-brand p{font-size:11px;color:var(--muted);max-width:260px;margin-top:16px}.foot-col h4{font:700 11px var(--sora);margin-bottom:15px}.foot-col ul{list-style:none;display:grid;gap:9px}.foot-col li,.foot-col a{font-size:11px;color:var(--muted)}.foot-col a:hover{color:var(--green)}.foot-bottom{margin-top:42px;padding-top:18px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:15px;color:var(--muted);font-size:10px}.foot-bottom .tagline{font:9px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:#c1cec4}
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}.reveal.in-view{opacity:1;transform:none}
+@media(max-width:900px){.col{width:min(100% - 40px,680px)}nav{padding:0 20px}.nav-links{position:fixed;inset:76px 0 auto 0;background:rgba(5,8,6,.98);border-bottom:1px solid var(--line);padding:24px 24px 30px;display:none;align-items:stretch;gap:0;flex-direction:column}.nav-links.open{display:flex}.nav-links>a:not(.nav-cta){padding:13px 0;font-size:15px;border-bottom:1px solid var(--line)}.nav-links .nav-cta{margin-top:18px}.burger{display:block}.nav-right .login{display:none}.hero{padding:60px 0 65px}.hero-grid{grid-template-columns:1fr;gap:15px}.hero-copy{max-width:650px}.hero-art{grid-row:1;min-height:340px;max-width:470px;width:100%;margin:auto}.sari-image{max-height:335px;width:min(76%,300px)}.art-orbit{width:300px}.chat-float.one{right:0;top:6%}.chat-float.two{left:0;bottom:8%}.art-label{right:8%;bottom:0}.hero-copy{text-align:center;margin:auto}.hero-copy .eyebrow{justify-content:center}.hero-copy .lede{margin-left:auto;margin-right:auto}.hero-copy .cta-row,.micro-proof{justify-content:center}.benefit-grid{grid-template-columns:repeat(2,1fr)}.benefit:nth-child(3){border-left:0;padding-left:0;border-top:1px solid var(--line)}.benefit:nth-child(4){border-top:1px solid var(--line)}.agents-grid{grid-template-columns:1fr}.agent-card{min-height:210px}.steps{grid-template-columns:repeat(2,1fr)}.step:nth-child(3){border-left:0;padding-left:0;border-top:1px solid var(--line)}.step:nth-child(4){border-top:1px solid var(--line)}.pricing-grid{grid-template-columns:repeat(2,1fr)}.pricing-top{align-items:start;flex-direction:column}.pricing-note{max-width:none}.foot-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.col{width:calc(100% - 36px)}nav{height:68px;padding:0 17px}.brand-name{font-size:17px}.brand img{width:27px;height:27px}.nav-links{top:68px}.status-strip .col{font-size:8px;letter-spacing:.035em}.hero{padding:38px 0 58px}h1{font-size:clamp(43px,13vw,61px)}.hero-art{min-height:290px}.art-orbit{width:250px}.sari-image{max-height:285px;width:72%}.chat-float{font-size:9px;padding:9px 10px;max-width:145px}.chat-float.one{right:-3px}.chat-float.two{left:-3px}.section{padding:72px 0}.section-head{margin-bottom:33px}.section h2{font-size:34px}.benefit{padding:20px 12px 21px 0;min-height:170px}.benefit:not(:first-child){padding-left:13px}.benefit:nth-child(3){padding-left:0}.benefit h3{font-size:15px;margin-top:22px}.benefit p{font-size:11px}.agents-section{padding:70px 0}.agent-card{padding:22px}.steps{grid-template-columns:1fr 1fr}.step{padding:20px 10px 18px 0}.step:not(:first-child){padding-left:12px}.step:nth-child(3){padding-left:0}.step h3{font-size:14px;margin-top:19px}.step p{font-size:11px}.pricing-grid{grid-template-columns:1fr}.price-card{min-height:185px}.custom-row{align-items:flex-start;flex-direction:column;padding:20px}.trust-grid{grid-template-columns:1fr}.trust-card{padding:22px}.faq-q{font-size:13px}.final-cta{padding:70px 0}.foot-grid{grid-template-columns:1fr 1fr;gap:30px 18px}.foot-brand{grid-column:1/-1}.foot-bottom{flex-direction:column}.btn{width:100%}.cta-row{width:100%}.cta-row .btn{flex:1 1 100%}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}.reveal{opacity:1;transform:none}}
 </style>
 </head>
-<body id="top">
-  <nav id="nav">
-    <a class="brand" href="#top" aria-label="Voltar ao topo">
-      <img src="assets/logo-icon.png" alt="">
-      <div class="wm">Sempre<b>on</b>Tech</div>
-    </a>
-    <div class="nav-right">
-      <div class="nav-links" id="navLinks">
-        <a href="#top" onclick="closeMenu()">Início</a>
-        <a href="#solucoes" onclick="closeMenu()">Soluções</a>
-        <a href="#planos" onclick="closeMenu()">Planos</a>
-        <a href="#contato" onclick="closeMenu()">Contato</a>
-        <a href="https://painel.sempreontech.com.br/" onclick="closeMenu()">Entrar</a>
-        <a class="nav-cta" href="#planos" onclick="closeMenu()">Montar seu plano</a>
-        <a class="nav-cta" id="wppNav" href="#" target="_blank" rel="noopener" onclick="closeMenu()">Falar com a Sari</a>
-      </div>
-      <button class="burger" id="burger" aria-label="Abrir menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </nav>
-
-  <div class="status-strip">
-    <div class="col"><span class="dot-live"></span> Sari está <b>online agora</b> — respondendo em tempo real</div>
+<body>
+<div class="wrap">
+<nav id="nav" aria-label="Navegação principal">
+  <a class="brand" href="#top" aria-label="Sempreon, início"><img src="assets/logo-icon.png" alt=""><span class="brand-name">Sempre<span>on</span>Tech</span></a>
+  <div class="nav-links" id="navLinks">
+    <a href="#solucoes" onclick="closeMenu()">Soluções</a><a href="#como-funciona" onclick="closeMenu()">Como funciona</a><a href="#planos" onclick="closeMenu()">Planos</a><a href="#confianca" onclick="closeMenu()">Confiança</a><a href="#faq" onclick="closeMenu()">FAQ</a>
+    <a class="nav-cta" href="https://painel.sempreontech.com.br/planos">Montar meu plano <span>↗</span></a>
   </div>
+  <div class="nav-right"><a class="login" href="https://painel.sempreontech.com.br/">Entrar</a><button class="burger" id="burger" aria-label="Abrir menu" aria-expanded="false"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></div>
+</nav>
+<div class="status-strip"><div class="col"><span class="dot"></span><b>Sempre online</b><span>·</span> Agentes de IA para WhatsApp Business <span>·</span> Atendimento 24 horas</div></div>
 
-  <div class="wrap">
-    <header class="hero col">
-      <div class="hero-bg" aria-hidden="true">
-        <img src="assets/circuit-bg.png" alt="">
-      </div>
-      <div class="hero-grid">
-        <div class="hero-text">
-          <div class="eyebrow reveal"><span class="dot-live"></span> Chatbot com IA para WhatsApp Business</div>
-          <h1 class="reveal">O chatbot de IA que <em>atende seu WhatsApp</em> 24h.</h1>
-          <p class="lede reveal">A Sari é a agente de inteligência artificial que cuida do seu WhatsApp Business, responde, qualifica e converte clientes por você.</p>
-          <div class="cta-row reveal">
-            <a class="btn btn-primary" id="wpp2" href="#" target="_blank" rel="noopener">Falar com a Sari</a>
-            <a class="btn btn-primary" href="#planos">Montar seu plano</a>
-          </div>
-          <div class="feat-row reveal">
-            <div class="feat-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>Atendimento 24h</div>
-            <div class="feat-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h8l-1 8 10-12h-8l1-8z"/></svg>Respostas instantâneas</div>
-            <div class="feat-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>Mais vendas</div>
-            <div class="feat-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>Sem complicação</div>
-          </div>
-        </div>
-        <div class="hero-visual reveal">
-          <div class="hero-photo">
-            <div class="hero-frame"></div>
-            <span class="corner tl"></span><span class="corner br"></span>
-            <img class="sari" src="assets/sari.png" alt="Sari, atendente de IA da Sempreon">
-            <div class="hero-bub bub1">Olá 👋<br>Como posso ajudar?<span class="t">14:32</span></div>
-            <div class="hero-bub out bub2">Quero saber sobre os planos<span class="t">14:33</span></div>
-            <div class="hero-bub bub3">Claro! Veja nossas opções disponíveis.<span class="t">14:33</span></div>
-            <div class="hero-badge">
-              <div class="dot-ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></div>
-              <div><div class="t1">Sari <span class="dot-live" style="width:5px;height:5px"></span></div><div class="t2">Sua assistente IA</div></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </header>
-
-    <section class="block" id="solucoes">
-      <div class="col">
-        <div class="sec-head">
-          <div class="sec-eyebrow reveal">Soluções que impulsionam</div>
-          <h2 class="reveal">Seu negócio</h2>
-          <p class="sec-lede reveal">Automação completa com chatbot de IA para transformar conversas do WhatsApp em vendas.</p>
-        </div>
-        <div class="sol-grid">
-          <div class="sol-card reveal">
-            <span class="idx mono">01</span>
-            <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></div>
-            <h3>Atendimento 24h</h3>
-            <p>Responda clientes automaticamente a qualquer hora do dia.</p>
-          </div>
-          <div class="sol-card reveal">
-            <span class="idx mono">02</span>
-            <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></div>
-            <h3>Agendamento automático</h3>
-            <p>Agende serviços e compromissos sem complicação.</p>
-          </div>
-          <div class="sol-card reveal">
-            <span class="idx mono">03</span>
-            <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
-            <h3>Cobrança inteligente</h3>
-            <p>Envie lembretes e receba mais com automação.</p>
-          </div>
-          <div class="sol-card reveal">
-            <span class="idx mono">04</span>
-            <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 15v3M12 10v8M17 6v12"/></svg></div>
-            <h3>Relatórios completos</h3>
-            <p>Acompanhe resultados e tome decisões com dados.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="agents-band">
-      <img class="bg-net" src="assets/network-nodes.png" alt="">
-      <div class="col block" style="padding:64px 0">
-        <div class="sec-head">
-          <div class="sec-eyebrow reveal">Já rodando, com cliente real</div>
-          <h2 class="reveal">Cada negócio, seu próprio agente</h2>
-          <p class="sec-lede reveal">Atendentes de IA sob medida, já em produção.</p>
-        </div>
-        <div class="agents">
-          <div class="agent reveal"><span class="tag"><span class="dot-live" style="width:5px;height:5px"></span>Alimentação</span><h3>Dora</h3><div class="role">Ponto do Frango · Rotisseria</div><p>Recebe pedido, monta carrinho, lê comprovante de Pix e organiza entrega — tudo no WhatsApp.</p></div>
-          <div class="agent reveal"><span class="tag"><span class="dot-live" style="width:5px;height:5px"></span>Saúde</span><h3>Clara</h3><div class="role">Padrão Enfermagem · Atendimento domiciliar</div><p>Atende famílias que precisam de cuidador, responde por texto e áudio e registra cada contato.</p></div>
-          <div class="agent reveal"><span class="tag"><span class="dot-live" style="width:5px;height:5px"></span>Vendas B2B</span><h3>Sari</h3><div class="role">Sempreon · Prospecção</div><p>Prospecta empresas, apresenta a solução e conduz o lead até o fechamento, sozinha.</p></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="block" id="como-funciona">
-      <div class="col">
-        <div class="sec-head">
-          <div class="sec-eyebrow reveal">Como funciona</div>
-          <h2 class="reveal">Do cadastro ao primeiro atendimento</h2>
-          <p class="sec-lede reveal">Sem instalação, sem trocar de número, sem complicação técnica.</p>
-        </div>
-        <div class="sol-grid">
-          <div class="sol-card reveal">
-            <span class="idx mono">01</span>
-            <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
-            <h3>Escolha seus módulos</h3>
-            <p>Monte seu plano em minutos, só com o que seu negócio precisa.</p>
-          </div>
-          <div class="sol-card reveal">
-            <span class="idx mono">02</span>
-            <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></div>
-            <h3>Configure seu agente</h3>
-            <p>Conte sobre sua empresa, produtos e como quer ser atendido.</p>
-          </div>
-          <div class="sol-card reveal">
-            <span class="idx mono">03</span>
-            <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM19 14h2v2h-2zM14 19h2v2h-2zM19 19h2v2h-2z"/></svg></div>
-            <h3>Conecte o WhatsApp</h3>
-            <p>Escaneie um QR code com seu próprio número, sem trocar de número.</p>
-          </div>
-          <div class="sol-card reveal">
-            <span class="idx mono">04</span>
-            <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></div>
-            <h3>Comece a atender</h3>
-            <p>Seu agente já responde, agenda e qualifica sozinho, 24h.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="block" id="planos">
-      <div class="col">
-        <div class="sec-head">
-          <div class="sec-eyebrow reveal">Planos</div>
-          <h2 class="reveal">Monte o seu, módulo por módulo</h2>
-          <p class="sec-lede reveal">Sem pacote fechado — você escolhe só o que faz sentido pro seu negócio, e o preço se ajusta na hora.</p>
-        </div>
-        <div class="plans">
-          <div class="plan feat reveal">
-            <div class="badge">Sempre incluso</div>
-            <div class="pname">Atendimento</div>
-            <div class="price">R$ 97<span>/mês</span></div>
-            <div class="pdesc">Agente que tira dúvidas do cliente 24h pelo WhatsApp.</div>
-          </div>
-          <div class="plan reveal">
-            <div class="pname">Agendamento</div>
-            <div class="price">R$ 30<span>/mês</span></div>
-            <div class="pdesc">Marca horário direto na agenda, sem ida e volta de mensagem.</div>
-          </div>
-          <div class="plan reveal">
-            <div class="pname">Notificações · dono</div>
-            <div class="price">R$ 20<span>/mês</span></div>
-            <div class="pdesc">Avisa você no WhatsApp quando acontece algo importante.</div>
-          </div>
-          <div class="plan reveal">
-            <div class="pname">Notificações · cliente</div>
-            <div class="price">R$ 25<span>/mês</span></div>
-            <div class="pdesc">Avisa o cliente automaticamente (lembrete, atualização, etc).</div>
-          </div>
-          <div class="plan custom reveal">
-            <div class="pname">Personalizado</div>
-            <div class="price">A consultar</div>
-            <div class="pdesc">Precisa de algo fora dos módulos padrão? A gente monta sob medida pro seu negócio.</div>
-          </div>
-          <div class="plan soon reveal">
-            <div class="badge soon">Em breve</div>
-            <div class="pname">Responde por voz</div>
-            <div class="price">Em breve</div>
-            <div class="pdesc">O agente entende e responde áudio, não só texto.</div>
-          </div>
-        </div>
-        <div class="plans-cta reveal">
-          <a class="btn btn-primary" href="https://painel.sempreontech.com.br/planos">Montar meu plano</a>
-        </div>
-        <p class="plans-note reveal">Cadastro direto no painel — sem precisar falar com ninguém antes, se não quiser.</p>
-      </div>
-    </section>
-
-    <section class="block" id="confianca">
-      <div class="col">
-        <div class="sec-head">
-          <div class="sec-eyebrow reveal">Depois de pagar</div>
-          <h2 class="reveal">Pagamento confirmado. Agora vamos colocar seu agente pra funcionar.</h2>
-          <p class="sec-lede reveal">A contratação não termina no pagamento — seu agente passa por configuração, teste e conexão antes de ficar no ar de verdade.</p>
-        </div>
-
-        <div class="trust-flow">
-          <div class="trust-step reveal"><span class="n">1</span>Pagamento</div>
-          <span class="trust-arrow" aria-hidden="true">→</span>
-          <div class="trust-step reveal"><span class="n">2</span>Configuração</div>
-          <span class="trust-arrow" aria-hidden="true">→</span>
-          <div class="trust-step reveal"><span class="n">3</span>Teste do agente</div>
-          <span class="trust-arrow" aria-hidden="true">→</span>
-          <div class="trust-step reveal"><span class="n">4</span>Conexão do WhatsApp</div>
-          <span class="trust-arrow" aria-hidden="true">→</span>
-          <div class="trust-step reveal"><span class="n">5</span>Ativação</div>
-        </div>
-
-        <div class="trust-grid">
-          <div class="trust-card reveal">
-            <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><path d="M1 10h22"/></svg></div>
-            <h3>Pagamento seguro</h3>
-            <p>O pagamento é processado pelo Mercado Pago, via Pix. A Sempreon não armazena dados do seu cartão ou conta.</p>
-          </div>
-          <div class="trust-card reveal">
-            <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="m9 16 2 2 4-4"/></svg></div>
-            <h3>7 dias para decidir com tranquilidade</h3>
-            <p>Nas contratações realizadas online, você conta com o direito legal de arrependimento de 7 dias, conforme a legislação aplicável. Veja as condições nos <a href="https://painel.sempreontech.com.br/termos" target="_blank" rel="noopener">Termos de Uso</a>.</p>
-          </div>
-          <div class="trust-card reveal">
-            <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-            <h3>Suporte humano</h3>
-            <p>Por trás do agente tem gente de verdade. Fale com a Sempreon por <a href="mailto:sempreontech@gmail.com">e-mail</a> ou pelo <a href="#" class="wpp-saiba-mais" target="_blank" rel="noopener">WhatsApp</a> sempre que precisar.</p>
-          </div>
-          <div class="trust-card reveal">
-            <div class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></div>
-            <h3>Sobre a conexão com o WhatsApp</h3>
-            <p>A conexão depende de serviços de terceiros e está sujeita às regras e limitações da própria plataforma de WhatsApp.</p>
-          </div>
-        </div>
-
-        <div class="trust-cta reveal">
-          <p>Ficou com alguma dúvida antes de contratar?</p>
-          <a class="btn btn-ghost wpp-saiba-mais" href="#" target="_blank" rel="noopener">Fale com a Sempreon</a>
-        </div>
-      </div>
-    </section>
-
-    <section class="block" id="faq">
-      <div class="col">
-        <div class="sec-head">
-          <div class="sec-eyebrow reveal">Perguntas frequentes</div>
-          <h2 class="reveal">Ainda com dúvida?</h2>
-        </div>
-        <div class="faq-list">
-          <div class="faq-item reveal">
-            <button class="faq-q" aria-expanded="false">
-              Preciso trocar de número de WhatsApp?
-              <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-            </button>
-            <div class="faq-a"><p>Não, você conecta o número que já usa.</p></div>
-          </div>
-          <div class="faq-item reveal">
-            <button class="faq-q" aria-expanded="false">
-              Quanto tempo leva pra configurar?
-              <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-            </button>
-            <div class="faq-a"><p>Poucos minutos — o cadastro e a configuração inicial são por formulário, direto no painel.</p></div>
-          </div>
-          <div class="faq-item reveal">
-            <button class="faq-q" aria-expanded="false">
-              Como funciona o cancelamento?
-              <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-            </button>
-            <div class="faq-a"><p>Fale com a gente quando quiser encerrar — sem burocracia.</p></div>
-          </div>
-          <div class="faq-item reveal">
-            <button class="faq-q" aria-expanded="false">
-              O agente pode inventar informação errada pro meu cliente?
-              <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-            </button>
-            <div class="faq-a"><p>Não — ele é orientado a nunca inventar preço ou prazo, e encaminha pra um humano quando não sabe a resposta.</p></div>
-          </div>
-          <div class="faq-item reveal">
-            <button class="faq-q" aria-expanded="false">
-              Preciso saber programar?
-              <svg class="faq-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-            </button>
-            <div class="faq-a"><p>Não, todo o processo é por formulário.</p></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="block final" id="contato">
-      <div class="col">
-        <div class="sec-eyebrow reveal">Pronto para começar?</div>
-        <h2 class="reveal">Vamos automatizar seu atendimento?</h2>
-        <p class="sec-lede reveal">Cadastre-se direto no painel, ou fale primeiro com a Sari no WhatsApp — como preferir.</p>
-        <div class="cta-row reveal">
-          <a class="btn btn-primary" href="https://painel.sempreontech.com.br/planos">Montar meu plano</a>
-          <a class="btn btn-ghost wpp-saiba-mais" href="#" target="_blank" rel="noopener">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.945C.16 5.335 5.495 0 12.057 0a11.821 11.821 0 018.413 3.488 11.824 11.824 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.477-.607z"/></svg>
-            Falar com a Sari
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <footer>
-      <div class="col">
-        <div class="foot-grid">
-          <div class="foot-brand">
-            <a class="brand" href="#top"><img src="assets/logo-icon.png" alt=""><div class="wm">Sempre<b>on</b>Tech</div></a>
-            <p>Automatizamos conversas. Potencializamos resultados. Transformamos o futuro do seu negócio.</p>
-          </div>
-          <div class="foot-col">
-            <h4>Soluções</h4>
-            <ul>
-              <li><a href="#solucoes">Atendimento 24h</a></li>
-              <li><a href="#solucoes">Agendamento automático</a></li>
-              <li><a href="#solucoes">Cobrança inteligente</a></li>
-              <li><a href="#solucoes">Relatórios</a></li>
-            </ul>
-          </div>
-          <div class="foot-col">
-            <h4>Empresa</h4>
-            <ul>
-              <li><a href="#planos">Planos</a></li>
-              <li><a href="#contato">Contato</a></li>
-              <li><a href="https://painel.sempreontech.com.br/termos" target="_blank" rel="noopener">Termos de Uso</a></li>
-              <li><a href="https://painel.sempreontech.com.br/privacidade" target="_blank" rel="noopener">Política de Privacidade</a></li>
-            </ul>
-          </div>
-          <div class="foot-col">
-            <h4>Contato</h4>
-            <ul>
-              <li id="footWpp"></li>
-              <li><a href="mailto:sempreontech@gmail.com">sempreontech@gmail.com</a></li>
-              <li>Itanhaém, SP</li>
-            </ul>
-          </div>
-        </div>
-        <div class="foot-bottom">
-          <div>© 2026 SempreonTech. Todos os direitos reservados.</div>
-          <span class="mono"><span class="dot-live" style="width:5px;height:5px"></span>Sempre online · Sempre vendendo</span>
-        </div>
-      </div>
-    </footer>
+<main id="top">
+<section class="hero">
+ <div class="col hero-grid">
+  <div class="hero-copy">
+   <div class="eyebrow"><span class="dot"></span> SUA OPERAÇÃO, SEM PAUSAS</div>
+   <h1>Seu WhatsApp.<br><span class="outline">Sempre</span> <span class="green">atendido.</span></h1>
+   <p class="lede">A <strong>Sari</strong> é uma atendente virtual com inteligência artificial que atende, agenda e vende pelo WhatsApp do seu negócio — <strong>24 horas por dia.</strong></p>
+   <div class="cta-row"><a class="btn btn-primary wpp-saiba-mais" href="#" target="_blank" rel="noopener">Falar com a Sari <span>↗</span></a><a class="btn btn-secondary" href="https://painel.sempreontech.com.br/planos">Montar seu plano <span>→</span></a></div>
+   <div class="micro-proof"><span class="line"></span> Sem trocar de número. Sem precisar programar.</div>
   </div>
+  <div class="hero-art">
+   <div class="art-orbit"></div>
+   <img class="sari-image" src="assets/sari.png" alt="Sari, atendente virtual da Sempreon" onerror="this.style.display='none'">
+   <div class="chat-float one"><small>CLIENTE · 10:42</small><strong>Oi! Tem horário disponível hoje?</strong></div>
+   <div class="chat-float two"><small><span class="ok">● SARI · ONLINE</span></small><strong>Temos sim! Quer que eu agende pra você?</strong></div>
+   <div class="art-label">IA aplicada ao seu atendimento / 24·7</div>
+  </div>
+ </div>
+</section>
+
+<section class="section" id="solucoes">
+ <div class="col">
+  <div class="section-head reveal"><div class="kicker">01 / O que a Sari faz</div><h2>Mais presença no WhatsApp.<br>Menos tarefas nas suas mãos.</h2><p>Enquanto você cuida do negócio, sua atendente virtual mantém as conversas andando e as oportunidades vivas.</p></div>
+  <div class="benefit-grid">
+   <article class="benefit reveal"><span class="num">01 — ALWAYS ON</span><h3>Atendimento 24h</h3><p>Respostas rápidas e personalizadas, inclusive fora do horário comercial.</p></article>
+   <article class="benefit reveal"><span class="num">02 — AGENDA</span><h3>Agendamento automático</h3><p>Organiza horários, confirma compromissos e reduz o vai e vem de mensagens.</p></article>
+   <article class="benefit reveal"><span class="num">03 — RECEBIMENTOS</span><h3>Cobrança inteligente</h3><p>Ajuda a conduzir cobranças e orientações de pagamento durante o atendimento.</p></article>
+   <article class="benefit reveal"><span class="num">04 — VISIBILIDADE</span><h3>Relatórios completos</h3><p>Acompanhe os atendimentos e tenha mais clareza sobre o que acontece no WhatsApp.</p></article>
+  </div>
+ </div>
+</section>
+
+<section class="agents-section">
+ <div class="col">
+  <div class="section-head reveal"><div class="kicker">02 / Em operação</div><h2>Não é só promessa.<br>Já tem agente trabalhando.</h2><p>Três agentes diferentes, aplicados a rotinas reais de negócio.</p></div>
+  <div class="agents-grid">
+   <article class="agent-card reveal"><div class="agent-top"><div class="agent-name">Dora</div><span class="status">● EM PRODUÇÃO</span></div><div class="agent-role">Ponto do Frango · Rotisseria</div><h3>Do pedido ao Pix.</h3><p>Recebe pedidos, monta carrinho e lê comprovantes de Pix para apoiar o fluxo de venda.</p><span class="agent-tag">VENDAS / PEDIDOS / PAGAMENTO</span></article>
+   <article class="agent-card reveal"><div class="agent-top"><div class="agent-name">Clara</div><span class="status">● EM PRODUÇÃO</span></div><div class="agent-role">Padrão Enfermagem · Atendimento domiciliar</div><h3>Atendimento acolhedor.</h3><p>Atende familiares e clientes por texto e áudio, facilitando o primeiro contato e as orientações.</p><span class="agent-tag">ATENDIMENTO / TEXTO / ÁUDIO</span></article>
+   <article class="agent-card reveal"><div class="agent-top"><div class="agent-name">Sari</div><span class="status">● EM PRODUÇÃO</span></div><div class="agent-role">Sempreon · Prospecção B2B</div><h3>Conversa que abre portas.</h3><p>Apresenta a solução Sempreon e conduz conversas comerciais com potenciais parceiros e clientes.</p><span class="agent-tag">PROSPECÇÃO / COMERCIAL</span></article>
+  </div>
+ </div>
+</section>
+
+<section class="section" id="como-funciona">
+ <div class="col">
+  <div class="section-head reveal"><div class="kicker">03 / Comece sem complicação</div><h2>Da escolha à primeira conversa.</h2><p>Você monta o que precisa, configura seu agente e conecta o WhatsApp que já usa.</p></div>
+  <div class="steps">
+   <article class="step reveal"><span class="step-no">PASSO 01</span><h3>Escolha seus módulos</h3><p>Monte seu plano de acordo com as necessidades do seu negócio.</p></article>
+   <article class="step reveal"><span class="step-no">PASSO 02</span><h3>Configure seu agente</h3><p>Informe os dados do negócio e as orientações para o atendimento.</p></article>
+   <article class="step reveal"><span class="step-no">PASSO 03</span><h3>Conecte o WhatsApp</h3><p>Leia o QR code com o celular. Você não precisa trocar de número.</p></article>
+   <article class="step reveal"><span class="step-no">PASSO 04</span><h3>Comece a atender</h3><p>Depois dos testes e da ativação, seu agente começa a trabalhar.</p></article>
+  </div>
+ </div>
+</section>
+
+<section class="section pricing-section" id="planos">
+ <div class="col">
+  <div class="pricing-top">
+   <div class="section-head reveal"><div class="kicker">04 / Planos modulares</div><h2>Você escolhe.<br>Paga só pelo que usa.</h2><p>Os módulos são contratados individualmente. Sem pacote fechado: combine os recursos que fazem sentido para sua operação.</p></div>
+   <div class="pricing-note reveal">VALORES MENSAIS<br>PREÇO AVULSO POR MÓDULO</div>
+  </div>
+  <div class="pricing-grid">
+   <article class="price-card featured reveal"><span class="price-label">BASE DO SEU AGENTE · INCLUSO</span><h3>Atendimento</h3><div class="price">R$ 97 <small>/mês</small></div><p>O módulo essencial para responder seus clientes pelo WhatsApp.</p><div class="card-bottom">SEMPRE INCLUSO</div></article>
+   <article class="price-card reveal"><span class="price-label">MÓDULO OPCIONAL</span><h3>Agendamento</h3><div class="price">R$ 30 <small>/mês</small></div><p>Para organizar e automatizar os agendamentos.</p><div class="card-bottom">ADICIONE AO SEU PLANO</div></article>
+   <article class="price-card reveal"><span class="price-label">MÓDULO OPCIONAL</span><h3>Notificações para o dono</h3><div class="price">R$ 20 <small>/mês</small></div><p>Receba avisos importantes sobre o que acontece no atendimento.</p><div class="card-bottom">ADICIONE AO SEU PLANO</div></article>
+   <article class="price-card reveal"><span class="price-label">MÓDULO OPCIONAL</span><h3>Notificações para clientes</h3><div class="price">R$ 25 <small>/mês</small></div><p>Envie lembretes e avisos aos seus clientes.</p><div class="card-bottom">ADICIONE AO SEU PLANO</div></article>
+   <article class="price-card reveal"><span class="price-label">EM DESENVOLVIMENTO</span><h3>Responde por voz</h3><div class="price soon">Em breve</div><p>Uma experiência de atendimento com respostas em áudio.</p><div class="card-bottom">DISPONIBILIDADE FUTURA</div></article>
+  </div>
+  <div class="custom-row reveal"><div><h3>Precisa de algo diferente?</h3><p>O módulo Personalizado é para integrações e necessidades específicas. Consulte a Sari.</p></div><a class="btn btn-primary wpp-personalizado" href="#" target="_blank" rel="noopener">Consultar personalizado ↗</a></div>
+ </div>
+</section>
+
+<section class="section" id="confianca">
+ <div class="col">
+  <div class="section-head reveal"><div class="kicker">05 / Transparência e segurança</div><h2>Você sabe o que acontece<br>em cada etapa.</h2><p>Contratação clara, acompanhamento humano e informações importantes antes de conectar seu WhatsApp.</p></div>
+  <div class="trust-grid">
+   <article class="trust-card reveal"><span class="index">01 / DEPOIS DO PAGAMENTO</span><h3>Configuração acompanhada</h3><p>O processo segue uma sequência: configuração do agente, testes, conexão do WhatsApp e ativação.</p><div class="trust-steps"><span>01 Configuração</span><span>02 Teste</span><span>03 Conexão</span><span>04 Ativação</span></div></article>
+   <article class="trust-card reveal"><span class="index">02 / PAGAMENTO</span><h3>Mercado Pago e Pix</h3><p>O pagamento é processado pelo Mercado Pago. <strong>A Sempreon não guarda dados de cartão.</strong></p></article>
+   <article class="trust-card reveal"><span class="index">03 / SEUS DIREITOS</span><h3>7 dias para se arrepender</h3><p>Você tem direito de arrependimento em até 7 dias, conforme as condições legais aplicáveis à contratação.</p></article>
+   <article class="trust-card reveal"><span class="index">04 / SUPORTE</span><h3>Tem gente por trás da tecnologia</h3><p>Se precisar, você pode falar com nosso suporte humano. A automação não elimina o contato com a equipe.</p></article>
+   <article class="trust-card reveal"><span class="index">05 / CONEXÃO</span><h3>Dependência de serviços terceiros</h3><p>A conexão do WhatsApp depende de serviços de terceiros e está sujeita às regras, disponibilidade e limitações dessas plataformas.</p></article>
+   <article class="trust-card reveal"><span class="index">06 / CONTROLE</span><h3>O agente segue suas orientações</h3><p>As informações do seu negócio orientam as respostas. Quando não souber, o agente deve encaminhar a conversa para uma pessoa.</p></article>
+  </div>
+  <div class="cta-row" style="margin-top:28px"><a class="btn btn-secondary" href="https://painel.sempreontech.com.br/termos" target="_blank" rel="noopener">Ler termos de uso ↗</a><a class="btn btn-secondary" href="https://painel.sempreontech.com.br/privacidade" target="_blank" rel="noopener">Política de privacidade ↗</a></div>
+ </div>
+</section>
+
+<section class="section" id="faq">
+ <div class="col">
+  <div class="section-head reveal"><div class="kicker">06 / Dúvidas comuns</div><h2>Antes de começar.</h2></div>
+  <div class="faq-list">
+   <div class="faq-item reveal"><button class="faq-q" aria-expanded="false">Preciso trocar de número de WhatsApp?<span class="chevron">＋</span></button><div class="faq-a"><div><p>Não. Você conecta o número que já usa no seu negócio, sem precisar trocar de número.</p></div></div></div>
+   <div class="faq-item reveal"><button class="faq-q" aria-expanded="false">Quanto tempo leva para configurar?<span class="chevron">＋</span></button><div class="faq-a"><div><p>A configuração inicial leva poucos minutos. Depois, você realiza os testes e conecta seu WhatsApp para ativação.</p></div></div></div>
+   <div class="faq-item reveal"><button class="faq-q" aria-expanded="false">Posso cancelar quando quiser?<span class="chevron">＋</span></button><div class="faq-a"><div><p>Sim. O cancelamento pode ser solicitado sem burocracia, entrando em contato com a equipe.</p></div></div></div>
+   <div class="faq-item reveal"><button class="faq-q" aria-expanded="false">O agente pode inventar preço ou prazo?<span class="chevron">＋</span></button><div class="faq-a"><div><p>Não deve. O agente é orientado a nunca inventar preços ou prazos. Quando não tem a informação ou não sabe responder, encaminha a conversa para um atendente humano.</p></div></div></div>
+   <div class="faq-item reveal"><button class="faq-q" aria-expanded="false">Preciso saber programar?<span class="chevron">＋</span></button><div class="faq-a"><div><p>Não. A configuração é feita pelo painel, com formulários e orientações simples.</p></div></div></div>
+  </div>
+ </div>
+</section>
+
+<section class="final-cta" id="contato">
+ <div class="col">
+  <div class="eyebrow"><span class="dot"></span> SUA PRÓXIMA CONVERSA COMEÇA AQUI</div>
+  <h2>Deixe o WhatsApp trabalhar junto com você.</h2>
+  <p>Conheça a Sari, escolha seus módulos e monte uma operação de atendimento que continua mesmo quando você está ocupado.</p>
+  <div class="cta-row"><a class="btn btn-primary" href="https://painel.sempreontech.com.br/planos">Montar meu plano ↗</a><a class="btn btn-secondary wpp-saiba-mais" href="#" target="_blank" rel="noopener">Falar com a Sari</a></div>
+ </div>
+</section>
+</main>
+
+<footer>
+ <div class="col">
+  <div class="foot-grid">
+   <div class="foot-brand"><a class="brand" href="#top"><img src="assets/logo-icon.png" alt=""><span class="brand-name">Sempre<span>on</span>Tech</span></a><p>Razão social: Sempre on Tech.<br>Agentes de IA para atender, agendar e vender pelo WhatsApp do seu negócio.</p></div>
+   <div class="foot-col"><h4>Soluções</h4><ul><li><a href="#solucoes">Atendimento 24h</a></li><li><a href="#solucoes">Agendamento automático</a></li><li><a href="#solucoes">Cobrança inteligente</a></li><li><a href="#solucoes">Relatórios completos</a></li></ul></div>
+   <div class="foot-col"><h4>Empresa</h4><ul><li><a href="#planos">Planos</a></li><li><a href="#confianca">Confiança</a></li><li><a href="https://painel.sempreontech.com.br/termos" target="_blank" rel="noopener">Termos de Uso</a></li><li><a href="https://painel.sempreontech.com.br/privacidade" target="_blank" rel="noopener">Privacidade</a></li></ul></div>
+   <div class="foot-col"><h4>Contato</h4><ul><li id="footWpp"></li><li><a href="mailto:sempreontech@gmail.com">sempreontech@gmail.com</a></li><li>Itanhaém, SP</li></ul></div>
+  </div>
+  <div class="foot-bottom"><span>© 2026 SempreonTech. Todos os direitos reservados.</span><span class="tagline">Sempre online · Sempre vendendo</span></div>
+ </div>
+</footer>
+</div>
 
 <script>
-  const WHATSAPP="5513978175551";
-  const MSG=encodeURIComponent("Olá! Vim pelo site da Sempreon e quero saber sobre a atendente de IA pro meu WhatsApp.");
-  const wlink="https://wa.me/"+WHATSAPP+"?text="+MSG;
-  ["wpp2","wppNav"].forEach(id=>{const e=document.getElementById(id);if(e)e.href=wlink});
-
-  const SAIBA_MSG=encodeURIComponent("Olá! Vi os planos no site da Sempreon e gostaria de saber mais.");
-  document.querySelectorAll('.wpp-saiba-mais').forEach(el=>{el.href="https://wa.me/"+WHATSAPP+"?text="+SAIBA_MSG});
-  const footWpp=document.getElementById('footWpp');
-  if(footWpp){const a=document.createElement('a');a.href=wlink;a.target="_blank";a.rel="noopener";a.textContent="55 13 97817-5551";footWpp.appendChild(a);}
-
-  const nav=document.getElementById('nav');
-  addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>10));
-
-  const burger=document.getElementById('burger');
-  const navLinks=document.getElementById('navLinks');
-  burger.addEventListener('click',()=>{
-    const open=navLinks.classList.toggle('open');
-    burger.classList.toggle('open',open);
-    burger.setAttribute('aria-expanded',open);
-    document.body.style.overflow=open?'hidden':'';
-  });
-  function closeMenu(){navLinks.classList.remove('open');burger.classList.remove('open');burger.setAttribute('aria-expanded',false);document.body.style.overflow='';}
-
-  document.querySelectorAll('.faq-item').forEach(item=>{
-    const q=item.querySelector('.faq-q');
-    q.addEventListener('click',()=>{
-      const open=item.classList.toggle('open');
-      q.setAttribute('aria-expanded',open);
-    });
-  });
-
-  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in-view');io.unobserve(e.target)}}),{threshold:.14});
-  document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%4*60)+'ms';io.observe(el)});
+const WHATSAPP="5513978175551";
+const MSG=encodeURIComponent("Olá! Vim pelo site da Sempreon e quero saber sobre a atendente de IA pro meu WhatsApp.");
+const wlink="https://wa.me/"+WHATSAPP+"?text="+MSG;
+const SAIBA_MSG=encodeURIComponent("Olá! Vi os planos no site da Sempreon e gostaria de saber mais.");
+document.querySelectorAll('.wpp-saiba-mais').forEach(el=>{el.href="https://wa.me/"+WHATSAPP+"?text="+SAIBA_MSG});
+const PERSONALIZADO_MSG=encodeURIComponent("Olá! Vi o módulo Personalizado no site da Sempreon — preciso de algo fora dos módulos padrão.");
+document.querySelectorAll('.wpp-personalizado').forEach(el=>{el.href="https://wa.me/"+WHATSAPP+"?text="+PERSONALIZADO_MSG});
+const footWpp=document.getElementById('footWpp');
+if(footWpp){const a=document.createElement('a');a.href=wlink;a.target="_blank";a.rel="noopener";a.textContent="55 13 97817-5551";footWpp.appendChild(a)}
+const nav=document.getElementById('nav');
+addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>10),{passive:true});
+const burger=document.getElementById('burger'),navLinks=document.getElementById('navLinks');
+burger.addEventListener('click',()=>{const open=navLinks.classList.toggle('open');burger.setAttribute('aria-expanded',String(open));document.body.style.overflow=open?'hidden':''});
+function closeMenu(){navLinks.classList.remove('open');burger.setAttribute('aria-expanded','false');document.body.style.overflow=''}
+document.querySelectorAll('.faq-item').forEach(item=>{const q=item.querySelector('.faq-q');q.addEventListener('click',()=>{const open=item.classList.toggle('open');q.setAttribute('aria-expanded',String(open))})});
+if('IntersectionObserver' in window){const io=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in-view');io.unobserve(e.target)}}),{threshold:.12});document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%4*55)+'ms';io.observe(el)})}else{document.querySelectorAll('.reveal').forEach(el=>el.classList.add('in-view'))}
 </script>
 </body>
 </html>
