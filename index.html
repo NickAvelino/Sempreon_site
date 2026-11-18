@@ -56,7 +56,8 @@ nav.scrolled{border-color:var(--line);background:rgba(5,8,6,.94)}
 .nav-cta{padding:11px 17px;background:var(--green);color:#04130c}.nav-cta:hover,.btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(57,240,106,.22)}
 .nav-right{display:flex;align-items:center;gap:16px}.login{font-size:13px;color:#b5c1b8}.burger{display:none;background:none;border:0;color:white;padding:8px}
 .status-strip{border-bottom:1px solid var(--line);background:rgba(14,61,32,.13)}.status-strip .col{min-height:34px;display:flex;align-items:center;gap:10px;color:var(--muted);font:10px var(--mono);letter-spacing:.07em;text-transform:uppercase}.status-strip b{color:var(--green);font-weight:500}
-.vagas-strip{border-bottom:1px solid var(--line);background:rgba(57,240,106,.1)}.vagas-strip .col{min-height:40px;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px 16px;padding-top:9px;padding-bottom:9px;color:var(--text);font:11px var(--mono);text-align:center}.vagas-strip b{color:var(--green);font-weight:600}.vagas-bar{width:160px;height:5px;border-radius:999px;background:rgba(0,0,0,.35);overflow:hidden;flex:none}.vagas-bar-fill{height:100%;background:var(--green);border-radius:999px;width:0}
+.vagas-strip{border-bottom:1px solid var(--line);background:rgba(57,240,106,.1)}.vagas-strip .col{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:20px 24px;color:var(--text);text-align:center;max-width:none;width:100%;box-sizing:border-box}.vagas-strip span#vagasTexto{font:700 22px/1.35 var(--inter);max-width:980px}.vagas-strip b{color:var(--green);font-weight:700}.vagas-bar{width:100%;max-width:360px;height:10px;border-radius:999px;background:rgba(0,0,0,.35);overflow:hidden}.vagas-bar-fill{height:100%;background:var(--green);border-radius:999px;width:0}
+@media(max-width:520px){.vagas-strip span#vagasTexto{font-size:17px;padding:0 14px}}
 .hero{padding:84px 0 82px;position:relative;overflow:hidden}.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
 .eyebrow{display:inline-flex;align-items:center;gap:10px;color:var(--green);font-size:10px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:24px}
 h1,h2,h3{font-family:var(--sora)}h1{font-size:clamp(46px,6.5vw,82px);line-height:.99;letter-spacing:-.075em;font-weight:800;max-width:750px}
@@ -323,8 +324,8 @@ function escapeHtml(s){const d=document.createElement('div');d.textContent=s;ret
     const dados=await res.json();
     if(!dados||!dados.ativo)return;
     const texto=document.getElementById('vagasTexto');
-    const partes=[`🔥 Restam <b>${dados.restantes}</b> de ${dados.total} vagas`];
-    if(dados.descontoLabel)partes.push(`com <b>${escapeHtml(dados.descontoLabel)}</b>`);
+    const partes=[`🔥 Restam apenas <b>${dados.restantes}</b> vagas`];
+    if(dados.descontoLabel)partes.push(`com desconto de <b>${escapeHtml(dados.descontoLabel)}</b>`);
     partes.push(`— use o cupom <b>${escapeHtml(dados.codigo)}</b>`);
     texto.innerHTML=partes.join(' ');
     document.getElementById('vagasBarFill').style.width=Math.max(4,Math.round((dados.restantes/dados.total)*100))+'%';
