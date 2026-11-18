@@ -56,6 +56,7 @@ nav.scrolled{border-color:var(--line);background:rgba(5,8,6,.94)}
 .nav-cta{padding:11px 17px;background:var(--green);color:#04130c}.nav-cta:hover,.btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(57,240,106,.22)}
 .nav-right{display:flex;align-items:center;gap:16px}.login{font-size:13px;color:#b5c1b8}.burger{display:none;background:none;border:0;color:white;padding:8px}
 .status-strip{border-bottom:1px solid var(--line);background:rgba(14,61,32,.13)}.status-strip .col{min-height:34px;display:flex;align-items:center;gap:10px;color:var(--muted);font:10px var(--mono);letter-spacing:.07em;text-transform:uppercase}.status-strip b{color:var(--green);font-weight:500}
+.vagas-strip{border-bottom:1px solid var(--line);background:rgba(57,240,106,.1)}.vagas-strip .col{min-height:40px;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px 16px;padding-top:9px;padding-bottom:9px;color:var(--text);font:11px var(--mono);text-align:center}.vagas-strip b{color:var(--green);font-weight:600}.vagas-bar{width:160px;height:5px;border-radius:999px;background:rgba(0,0,0,.35);overflow:hidden;flex:none}.vagas-bar-fill{height:100%;background:var(--green);border-radius:999px;width:0}
 .hero{padding:84px 0 82px;position:relative;overflow:hidden}.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
 .eyebrow{display:inline-flex;align-items:center;gap:10px;color:var(--green);font-size:10px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:24px}
 h1,h2,h3{font-family:var(--sora)}h1{font-size:clamp(46px,6.5vw,82px);line-height:.99;letter-spacing:-.075em;font-weight:800;max-width:750px}
@@ -120,6 +121,7 @@ footer{border-top:1px solid var(--line);padding:55px 0 22px;background:rgba(3,6,
   <div class="nav-right"><a class="login" href="https://painel.sempreontech.com.br/">Entrar</a><button class="burger" id="burger" aria-label="Abrir menu" aria-expanded="false"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></div>
 </nav>
 <div class="status-strip"><div class="col"><span class="dot"></span><b>Sempre online</b><span>·</span> Agentes de IA para WhatsApp Business <span>·</span> Atendimento 24 horas</div></div>
+<div class="vagas-strip" id="vagasStrip" style="display:none"><div class="col"><span id="vagasTexto"></span><div class="vagas-bar"><div class="vagas-bar-fill" id="vagasBarFill"></div></div></div></div>
 
 <main id="top">
 <section class="hero">
@@ -309,6 +311,26 @@ if('IntersectionObserver' in window){const io=new IntersectionObserver(entries=>
    mensagens por sessão (controlado pelo servidor, nunca só aqui). */
 const PAINEL_ORIGEM="https://painel.sempreontech.com.br";
 function escapeHtml(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML}
+
+// Faixa "vagas com desconto" — dados reais vindos de
+// /api/planos/vagas-destaque (painel), calculados a partir de usos
+// aprovados de verdade do cupom em destaque. Sem cupom configurado, ou
+// vagas esgotadas, a rota responde ativo:false e a faixa simplesmente
+// não aparece — nunca mostra número inventado.
+(async function carregarVagasDestaque(){
+  try{
+    const res=await fetch(PAINEL_ORIGEM+'/api/planos/vagas-destaque');
+    const dados=await res.json();
+    if(!dados||!dados.ativo)return;
+    const texto=document.getElementById('vagasTexto');
+    const partes=[`🔥 Restam <b>${dados.restantes}</b> de ${dados.total} vagas`];
+    if(dados.descontoLabel)partes.push(`com <b>${escapeHtml(dados.descontoLabel)}</b>`);
+    partes.push(`— use o cupom <b>${escapeHtml(dados.codigo)}</b>`);
+    texto.innerHTML=partes.join(' ');
+    document.getElementById('vagasBarFill').style.width=Math.max(4,Math.round((dados.restantes/dados.total)*100))+'%';
+    document.getElementById('vagasStrip').style.display='';
+  }catch(e){/* falha silenciosa — faixa fica oculta, nunca quebra o site */}
+})();
 
 let demoHistorico=[],demoDados={},demoEnviando=false;
 function demoRenderChat(){const chat=document.getElementById('demoChat');chat.innerHTML=demoHistorico.map(m=>`<div class="demo-msg ${m.role==='user'?'user':'bot'}">${escapeHtml(m.content)}</div>`).join('');chat.scrollTop=chat.scrollHeight}
