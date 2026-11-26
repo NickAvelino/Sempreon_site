@@ -95,9 +95,10 @@ h1 .outline{color:transparent;-webkit-text-stroke:1px rgba(238,245,240,.72)}h1 .
 .demo-msg{max-width:85%;padding:10px 13px;border-radius:10px;font-size:13px;line-height:1.5}
 .demo-msg.user{align-self:flex-end;background:var(--green-soft);color:var(--text)}
 .demo-msg.bot{align-self:flex-start;background:rgba(255,255,255,.04);border:1px solid var(--line);color:var(--text)}
-.sari-bubble-btn{position:fixed;right:22px;bottom:22px;z-index:60;width:58px;height:58px;border-radius:50%;background:var(--green);color:#042b11;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(0,0,0,.4);font-size:26px}
-.sari-bubble-btn:hover{filter:brightness(1.08)}
-.sari-panel{position:fixed;right:22px;bottom:92px;z-index:60;width:min(340px,calc(100vw - 44px));max-height:min(480px,calc(100vh - 140px));display:none;flex-direction:column;background:var(--panel);border:1px solid var(--line);border-radius:14px;box-shadow:0 20px 50px rgba(0,0,0,.5);overflow:hidden}
+@keyframes sariPulse{0%,100%{box-shadow:0 8px 24px rgba(0,0,0,.4),0 0 0 0 rgba(57,240,106,.55)}50%{box-shadow:0 8px 24px rgba(0,0,0,.4),0 0 0 12px rgba(57,240,106,0)}}
+.sari-bubble-btn{position:fixed;right:24px;bottom:24px;z-index:60;width:72px;height:72px;border-radius:50%;background:var(--green);color:#042b11;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(0,0,0,.4);font-size:32px;animation:sariPulse 2.4s infinite}
+.sari-bubble-btn:hover{filter:brightness(1.08);animation-play-state:paused}
+.sari-panel{position:fixed;right:24px;bottom:106px;z-index:60;width:min(420px,calc(100vw - 32px));max-height:min(620px,calc(100vh - 120px));display:none;flex-direction:column;background:var(--panel);border:1px solid var(--line);border-radius:14px;box-shadow:0 20px 50px rgba(0,0,0,.5);overflow:hidden}
 .sari-panel.open{display:flex}
 .sari-panel-head{display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid var(--line);background:var(--panel2)}
 .sari-avatar{width:30px;height:30px;border-radius:50%;background:var(--green-soft);color:var(--green);display:flex;align-items:center;justify-content:center;font:700 13px var(--sora);flex-shrink:0}
