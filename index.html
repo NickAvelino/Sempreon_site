@@ -133,7 +133,7 @@ footer{border-top:1px solid var(--line);padding:55px 0 22px;background:rgba(3,6,
    <div class="eyebrow"><span class="dot"></span> SUA OPERAÇÃO, SEM PAUSAS</div>
    <h1>Seu WhatsApp.<br><span class="outline">Sempre</span> <span class="green">atendido.</span></h1>
    <p class="lede">A <strong>Sari</strong> é uma atendente virtual com inteligência artificial que atende, agenda e vende pelo WhatsApp do seu negócio — <strong>24 horas por dia.</strong></p>
-   <div class="cta-row"><a class="btn btn-primary wpp-saiba-mais" href="#" target="_blank" rel="noopener">Falar com a Sari <span>↗</span></a><a class="btn btn-secondary" href="https://painel.sempreontech.com.br/planos">Montar seu plano <span>→</span></a></div>
+   <div class="cta-row"><a class="btn btn-primary" href="https://painel.sempreontech.com.br/planos">Montar seu plano <span>→</span></a></div>
    <div class="micro-proof"><span class="line"></span> Sem trocar de número. Sem precisar programar.</div>
   </div>
   <div class="hero-art">
@@ -233,7 +233,7 @@ footer{border-top:1px solid var(--line);padding:55px 0 22px;background:rgba(3,6,
    <article class="price-card reveal"><span class="price-label">MÓDULO OPCIONAL</span><h3>Notificações para clientes</h3><div class="price">R$ 25 <small>/mês</small></div><p>Envie lembretes e avisos aos seus clientes.</p><div class="card-bottom">ADICIONE AO SEU PLANO</div></article>
    <article class="price-card reveal"><span class="price-label">EM DESENVOLVIMENTO</span><h3>Responde por voz</h3><div class="price soon">Em breve</div><p>Uma experiência de atendimento com respostas em áudio.</p><div class="card-bottom">DISPONIBILIDADE FUTURA</div></article>
   </div>
-  <div class="custom-row reveal"><div><h3>Precisa de algo diferente?</h3><p>O módulo Personalizado é para integrações e necessidades específicas. Consulte a Sari.</p></div><a class="btn btn-primary wpp-personalizado" href="#" target="_blank" rel="noopener">Consultar personalizado ↗</a></div>
+  <div class="custom-row reveal"><div><h3>Precisa de algo diferente?</h3><p>O módulo Personalizado é para integrações e necessidades específicas. Consulte nossa equipe.</p></div><a class="btn btn-primary" href="mailto:sempreontech@gmail.com?subject=M%C3%B3dulo%20Personalizado" target="_blank" rel="noopener">Consultar personalizado ↗</a></div>
  </div>
 </section>
 
@@ -270,7 +270,7 @@ footer{border-top:1px solid var(--line);padding:55px 0 22px;background:rgba(3,6,
   <div class="eyebrow"><span class="dot"></span> SUA PRÓXIMA CONVERSA COMEÇA AQUI</div>
   <h2>Deixe o WhatsApp trabalhar junto com você.</h2>
   <p>Conheça a Sari, escolha seus módulos e monte uma operação de atendimento que continua mesmo quando você está ocupado.</p>
-  <div class="cta-row"><a class="btn btn-primary" href="https://painel.sempreontech.com.br/planos">Montar meu plano ↗</a><a class="btn btn-secondary wpp-saiba-mais" href="#" target="_blank" rel="noopener">Falar com a Sari</a></div>
+  <div class="cta-row"><a class="btn btn-primary" href="https://painel.sempreontech.com.br/planos">Montar meu plano ↗</a></div>
  </div>
 </section>
 </main>
@@ -281,7 +281,7 @@ footer{border-top:1px solid var(--line);padding:55px 0 22px;background:rgba(3,6,
    <div class="foot-brand"><a class="brand" href="#top"><img src="assets/logo-icon.png" alt=""><span class="brand-name">Sempre<span>on</span>Tech</span></a><p>Razão social: Sempre on Tech.<br>Agentes de IA para atender, agendar e vender pelo WhatsApp do seu negócio.</p></div>
    <div class="foot-col"><h4>Soluções</h4><ul><li><a href="#solucoes">Atendimento 24h</a></li><li><a href="#solucoes">Agendamento automático</a></li><li><a href="#solucoes">Cobrança inteligente</a></li><li><a href="#solucoes">Relatórios completos</a></li></ul></div>
    <div class="foot-col"><h4>Empresa</h4><ul><li><a href="#planos">Planos</a></li><li><a href="#confianca">Confiança</a></li><li><a href="https://painel.sempreontech.com.br/termos" target="_blank" rel="noopener">Termos de Uso</a></li><li><a href="https://painel.sempreontech.com.br/privacidade" target="_blank" rel="noopener">Privacidade</a></li></ul></div>
-   <div class="foot-col"><h4>Contato</h4><ul><li id="footWpp"></li><li><a href="mailto:sempreontech@gmail.com">sempreontech@gmail.com</a></li><li>Itanhaém, SP</li></ul></div>
+   <div class="foot-col"><h4>Contato</h4><ul><li><a href="mailto:sempreontech@gmail.com">sempreontech@gmail.com</a></li><li>Itanhaém, SP</li></ul></div>
   </div>
   <div class="foot-bottom"><span>© 2026 SempreonTech. Todos os direitos reservados.</span><span class="tagline">Sempre online · Sempre vendendo</span></div>
  </div>
@@ -289,15 +289,9 @@ footer{border-top:1px solid var(--line);padding:55px 0 22px;background:rgba(3,6,
 </div>
 
 <script>
-const WHATSAPP="5513978175551";
-const MSG=encodeURIComponent("Olá! Vim pelo site da Sempreon e quero saber sobre a atendente de IA pro meu WhatsApp.");
-const wlink="https://wa.me/"+WHATSAPP+"?text="+MSG;
-const SAIBA_MSG=encodeURIComponent("Olá! Vi os planos no site da Sempreon e gostaria de saber mais.");
-document.querySelectorAll('.wpp-saiba-mais').forEach(el=>{el.href="https://wa.me/"+WHATSAPP+"?text="+SAIBA_MSG});
-const PERSONALIZADO_MSG=encodeURIComponent("Olá! Vi o módulo Personalizado no site da Sempreon — preciso de algo fora dos módulos padrão.");
-document.querySelectorAll('.wpp-personalizado').forEach(el=>{el.href="https://wa.me/"+WHATSAPP+"?text="+PERSONALIZADO_MSG});
-const footWpp=document.getElementById('footWpp');
-if(footWpp){const a=document.createElement('a');a.href=wlink;a.target="_blank";a.rel="noopener";a.textContent="55 13 97817-5551";footWpp.appendChild(a)}
+// CTAs e número de WhatsApp da Sari removidos temporariamente do site
+// (número bloqueado pelo WhatsApp, 2026-11-26) — reverter quando o canal
+// for restabelecido.
 const nav=document.getElementById('nav');
 addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>10),{passive:true});
 const burger=document.getElementById('burger'),navLinks=document.getElementById('navLinks');
